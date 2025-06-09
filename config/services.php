@@ -33,6 +33,10 @@ return [
             'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
-    ],
+        'bible' => [
+            'token' => 'eb7a9aa09923bf71df88e1f36e6df98f',
+        ],
+        
 
+    ]
 ];
