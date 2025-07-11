@@ -9,8 +9,8 @@
 
 body {
     font-family: 'Montserrat', Arial, sans-serif;
-    background: #fff;
-    color: #222;
+    background: #181818;
+    color: #f3f3f3;
     line-height: 1.6;
 }
 
@@ -35,8 +35,8 @@ a:hover {
 
 /* Header */
 header {
-    background: #fff;
-    box-shadow: 0 2px 8px rgba(155,19,26,0.07);
+    background: #232323;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -52,6 +52,7 @@ header.scrolled {
     align-items: center;
     justify-content: space-between;
     padding: 1.2rem 0;
+    background: transparent;
 }
 
 .logo {
@@ -71,7 +72,13 @@ header.scrolled {
     font-family: 'Lora', serif;
     font-size: 1.1rem;
     font-weight: 700;
-    color: #9B131A;
+    color: #fff;
+}
+
+.logo:hover, .logo:focus {
+    background: none !important;
+    box-shadow: none !important;
+    outline: none !important;
 }
 
 /* Navegación */
@@ -86,6 +93,7 @@ nav {
     align-items: center;
     margin: 0 !important;
     padding: 0 !important;
+    background: #232323;
 }
 
 .nav-link {
@@ -93,7 +101,7 @@ nav {
     padding: 0.1rem 1rem;
     border-radius: 0px;
     transition: background 0.2s, color 0.2s;
-    color: #9B131A;
+    color: #fff;
 }
 
 .nav-link.btn {
@@ -104,14 +112,14 @@ nav {
 
 .nav-link.btn-outline {
     background: transparent;
-    border: 1.5px solid #9B131A;
-    color: #9B131A;
+    border: 1.5px solid #fff;
+    color: #fff;
 }
 
 .nav-link:hover,
 .nav-link.btn-outline:hover {
-    background: #720E29;
-    color: #fff;
+    background: #fff;
+    color: #232323;
 }
 
 .hamburger {
@@ -125,7 +133,7 @@ nav {
 .hamburger span {
     width: 28px;
     height: 3px;
-    background: #9B131A;
+    background: #fff;
     border-radius: 2px;
     transition: all 0.3s;
 }
@@ -144,7 +152,7 @@ nav {
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(155,19,26,0.45);
+    background: rgba(24,24,24,0.65);
     z-index: 1;
 }
 
@@ -188,14 +196,23 @@ nav {
 
 .btn-outline {
     background: transparent;
-    border: 2px solid #9B131A;
-    color: #9B131A;
+    border: 2px solid #fff;
+    color: #fff;
 }
 
 .btn:hover,
 .btn-outline:hover {
-    background: #720E29;
-    color: #fff;
+    background: #fff;
+    color: #232323;
+    border: 2px solid #fff;
+}
+
+.btn:hover,
+.nav-link.btn:hover {
+    background: #fff !important;
+    color: #9B131A !important;
+    border: 2px solid #9B131A !important;
+    box-shadow: 0 2px 8px rgba(155,19,26,0.10);
 }
 
 /* Scroll Down */
@@ -221,7 +238,7 @@ section {
 .section-title {
     font-family: 'Lora', serif;
     font-size: 2rem;
-    color: #9B131A;
+    color: #fff;
     margin-bottom: 2rem;
     text-align: center;
     font-weight: 700;
@@ -239,7 +256,7 @@ section {
 .about-image img {
     width: 320px;
     border-radius: 18px;
-    box-shadow: 0 2px 12px rgba(155,19,26,0.10);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.25);
 }
 
 .about-text {
@@ -248,13 +265,13 @@ section {
 
 .about-title {
     font-size: 1.3rem;
-    color: #9B131A;
+    color: #fff;
     margin-bottom: 0.7rem;
 }
 
 .about-description {
     margin-bottom: 1rem;
-    color: #222;
+    color: #e0e0e0;
 }
 
 /* Psalm of the Week */
@@ -269,7 +286,7 @@ section {
 .psalm-image img {
     width: 220px;
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(155,19,26,0.10);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
 }
 
 .psalm-text {
@@ -278,7 +295,7 @@ section {
 
 .psalm-reference {
     font-weight: 700;
-    color: #9B131A;
+    color: #fff;
     font-size: 1.1rem;
     margin-bottom: 0.5rem;
 }
@@ -286,7 +303,7 @@ section {
 .psalm-quote p {
     font-style: italic;
     margin-bottom: 0.5rem;
-    color: #222;
+    color: #e0e0e0;
 }
 
 /* Services */
@@ -298,9 +315,9 @@ section {
 }
 
 .service-card {
-    background: #F5F7FA;
+    background: #232323;
     border-radius: 16px;
-    box-shadow: 0 2px 12px rgba(155,19,26,0.08);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
     overflow: hidden;
     width: 320px;
     display: flex;
@@ -326,7 +343,7 @@ section {
 }
 
 .service-title {
-    color: #9B131A;
+    color: #fff;
     font-size: 1.2rem;
     margin-bottom: 0.5rem;
     font-weight: 600;
@@ -334,7 +351,7 @@ section {
 
 .service-description {
     margin-bottom: 1rem;
-    color: #222;
+    color: #e0e0e0;
 }
 
 /* Events */
@@ -346,9 +363,9 @@ section {
 }
 
 .event-card {
-    background: #F5F7FA;
+    background: #232323;
     border-radius: 14px;
-    box-shadow: 0 2px 12px rgba(155,19,26,0.08);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
     display: flex;
     gap: 1.2rem;
     padding: 1.2rem;
@@ -385,7 +402,7 @@ section {
 }
 
 .event-title {
-    color: #9B131A;
+    color: #fff;
     font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 0.3rem;
@@ -393,7 +410,7 @@ section {
 
 .event-info {
     font-size: 0.95rem;
-    color: #666;
+    color: #e0e0e0;
     margin-bottom: 0.5rem;
     display: flex;
     gap: 1.2rem;
@@ -433,7 +450,7 @@ section {
 .gallery-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(155,19,26,0.45);
+    background: rgba(24,24,24,0.65);
     opacity: 0;
     display: flex;
     align-items: center;
@@ -487,7 +504,7 @@ section {
     align-items: center;
     gap: 0.7rem;
     margin-bottom: 0.6rem;
-    color: #222;
+    color: #e0e0e0;
 }
 
 .contact-icon {
@@ -503,7 +520,7 @@ section {
 
 .social-link {
     display: inline-block;
-    background: #9B131A;
+    background: #232323;
     color: #fff;
     width: 32px;
     height: 32px;
@@ -515,17 +532,18 @@ section {
 }
 
 .social-link:hover {
-    background: #720E29;
-    color: #fff;
+    background: #fff;
+    color: #232323;
 }
 
 /* Contact Form */
 .contact-form {
     flex: 1 1 320px;
     min-width: 320px;
-    background: #fff;
+    background: #232323;
+    color: #fff;
     border-radius: 14px;
-    box-shadow: 0 2px 12px rgba(155,19,26,0.08);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
     padding: 2rem 1.5rem;
 }
 
@@ -543,10 +561,11 @@ section {
 .form-control {
     width: 100%;
     padding: 0.7rem;
-    border: 1.5px solid #720E29;
+    border: 1.5px solid #444;
     border-radius: 8px;
     font-size: 1rem;
-    background: #fff;
+    background: #232323;
+    color: #fff;
     transition: border 0.2s;
 }
 
@@ -557,7 +576,7 @@ section {
 
 /* Footer */
 footer {
-    background: #9B131A;
+    background: #181818;
     color: #fff;
     padding: 2.5rem 0 1rem 0;
 }
@@ -620,14 +639,123 @@ footer {
 }
 
 .footer-link a:hover {
-    color: #720E29;
+    color: #9B131A;
 }
 
 .footer-bottom {
     text-align: center;
     margin-top: 2rem;
     font-size: 0.95rem;
-    color: #720E29;
+    color: #9B131A;
+}
+
+/* Cambia el rojo oscuro a un rojo más vivo */
+:root {
+    --main-red: #FF3B3F;
+    --main-red-dark: #C62828;
+}
+
+.logo-text,
+.section-title,
+.psalm-reference,
+.service-title,
+.event-title,
+.contact-title,
+.footer-title,
+.footer-logo-text {
+    color: var(--main-red) !important;
+}
+
+.nav-link,
+.nav-link.btn-outline {
+    color: var(--main-red) !important;
+    border-color: var(--main-red) !important;
+}
+
+.nav-link.btn,
+.btn,
+.btn-outline {
+    background: var(--main-red) !important;
+    color: #fff !important;
+    border-color: var(--main-red) !important;
+}
+
+.btn-outline {
+    background: transparent !important;
+    color: var(--main-red) !important;
+}
+
+.btn:hover,
+.btn-outline:hover,
+.nav-link.btn:hover,
+.nav-link.btn-outline:hover {
+    background: #181818 !important; /* Fondo igual al body */
+    color: var(--main-red) !important;
+    border: 2px solid var(--main-red-dark) !important;
+}
+
+.social-link,
+.footer-link a {
+    background: var(--main-red) !important;
+    color: #fff !important;
+}
+
+.social-link:hover,
+.footer-link a:hover {
+    background: #fff !important;
+    color: var(--main-red-dark) !important;
+}
+
+.event-date {
+    background: var(--main-red) !important;
+    color: #fff !important;
+}
+
+.form-label {
+    color: var(--main-red) !important;
+}
+
+.form-control:focus {
+    border-color: var(--main-red) !important;
+}
+
+/* Ajusta el color de sombra para el nuevo rojo */
+.service-card,
+.event-card,
+.contact-form,
+.gallery-item {
+    box-shadow: 0 2px 12px rgba(255,59,63,0.18) !important;
+}
+
+/* Solución 1: Hover del botón Register (btn-outline) */
+.nav-link.btn-outline,
+.btn-outline {
+    background: transparent !important;
+    border: 2px solid var(--main-red) !important;
+    color: var(--main-red) !important;
+    transition: background 0.2s, color 0.2s;
+}
+
+.nav-link.btn-outline:hover,
+.btn-outline:hover {
+    background: var(--main-red) !important;
+    color: #fff !important;
+    border: 2px solid var(--main-red-dark) !important;
+}
+
+/* Solución 2: El hover del logo no debe afectar los botones */
+.logo:hover ~ nav .nav-link.btn-outline,
+.logo:focus ~ nav .nav-link.btn-outline {
+    background: transparent !important;
+    color: var(--main-red) !important;
+    border: 2px solid var(--main-red) !important;
+}
+
+.logo:hover ~ nav .nav-link.btn-outline:hover,
+.logo:focus ~ nav .nav-link.btn-outline:hover {
+    background: var(--main-red) !important;
+    color: #fff !important;
+    border: 2px solid var(--main-red-dark) !important;
 }
 
 /* Responsive */
@@ -645,7 +773,7 @@ footer {
     .nav-menu {
         flex-direction: column;
         gap: 0.5rem;
-        background: #fff;
+        background: #232323;
         position: absolute;
         top: 100%;
         right: 0;
@@ -693,4 +821,24 @@ footer {
 .nav-link.btn,
 .nav-link.btn-outline {
     white-space: nowrap;
+}
+
+.logo:hover ~ nav .nav-link.btn-outline,
+.logo:focus ~ nav .nav-link.btn-outline {
+    color: #9B131A !important;
+    background: transparent !important;
+    border: 1.5px solid #9B131A !important;
+}
+
+.logo:hover ~ nav .nav-link.btn-outline:hover,
+.logo:focus ~ nav .nav-link.btn-outline:hover {
+    color: #fff !important;
+    background: #720E29 !important;
+    border: 1.5px solid #720E29 !important;
+}
+
+.nav-link.btn-outline:hover {
+    background: #720E29;
+    color: #fff !important;
+    border: 1.5px solid #720E29;
 }

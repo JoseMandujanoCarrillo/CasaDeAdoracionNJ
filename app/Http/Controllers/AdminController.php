@@ -17,7 +17,8 @@ class AdminController extends Controller
     {
         $images = \App\Models\Gallery::all();
         $users = \App\Models\User::all();
-        return view('admin.dashboard', compact('images', 'users'));
+        $messages = \App\Models\ContactMessage::orderBy('created_at', 'desc')->get();
+        return view('admin.dashboard', compact('images', 'users', 'messages'));
     }
 
     public function gallery()
@@ -50,5 +51,16 @@ class AdminController extends Controller
         );
 
         return response()->json(['success' => true]);
+    }
+
+    public function updateProfile(Request $request, $id)
+    {
+        $request->validate([
+            'perfil' => 'required|string',
+        ]);
+        $user = \App\Models\User::findOrFail($id);
+        $user->perfil = $request->perfil;
+        $user->save();
+        return redirect()->route('admin.dashboard')->with('success', 'Perfil actualizado correctamente.');
     }
 }

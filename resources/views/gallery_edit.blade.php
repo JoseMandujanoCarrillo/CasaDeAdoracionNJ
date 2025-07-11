@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -101,6 +100,12 @@
         <form class="upload-form" action="{{ route('gallery.upload') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <input type="file" name="images[]" multiple accept="image/*" required>
+            <select name="categoria" class="form-input" style="max-width:180px;">
+                <option value="especiales">Especiales</option>
+                <option value="niños">Niños</option>
+                <option value="mujeres">Mujeres</option>
+                <option value="hombres">Hombres</option>
+            </select>
             <button type="submit">Subir Imágenes</button>
         </form>
 
@@ -109,12 +114,14 @@
             @foreach($images as $image)
                 <div class="gallery-edit-item">
                     <img src="{{ asset('uploads/' . $image->filename) }}" alt="Imagen de galería">
+                    <div style="font-size:0.95rem; color:#395B64; margin-top:0.3rem; text-align:center;">
+                        {{ $image->categoria ?? 'Sin categoría' }}
+                    </div>
                     <form action="{{ route('gallery.delete', $image->id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
                         <button class="delete-btn" title="Eliminar" onclick="return confirm('¿Eliminar esta imagen?')">&times;</button>
                     </form>
-                    
                 </div>
             @endforeach
         </div>

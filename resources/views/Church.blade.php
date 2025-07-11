@@ -13,7 +13,7 @@
     <!-- Encabezado -->
 <header>
     <div class="container header-container">
-        <a href="#inicio" class="logo" style="text-decoration:none;">
+        <a href="/church/public#inicio" class="logo" style="text-decoration:none;">
             <div class="logo-img-wrapper">
                 <img src="../resources/Images/logo.webp" alt="Casa de Adoración Logo">
             </div>
@@ -49,10 +49,21 @@
     </li>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const user = JSON.parse(localStorage.getItem('usuario'));
-            if (user && user.email === 'admin@dominio.com') {
-                document.getElementById('admin-btn').style.display = 'block';
-            }
+            // Mostrar el botón Panel Admin si el usuario está autenticado y tiene perfil permitido
+            @if(Auth::check())
+                var perfil = @json(Auth::user()->perfil);
+                var perfilesPermitidos = ['Admin', 'Eventos', 'Salmos', 'Gestor', 'Galeria'];
+                if (perfilesPermitidos.includes(perfil)) {
+                    document.getElementById('admin-btn').style.display = 'block';
+                }
+            @else
+                // Fallback para usuarios no autenticados (por si acaso)
+                const user = JSON.parse(localStorage.getItem('usuario'));
+                const perfilesPermitidos = ['Admin', 'Eventos', 'Salmos', 'Gestor', 'Galeria'];
+                if (user && perfilesPermitidos.includes(user.perfil)) {
+                    document.getElementById('admin-btn').style.display = 'block';
+                }
+            @endif
         });
     </script>
 @endguest
@@ -89,13 +100,13 @@
             <h2 class="section-title">Quiénes Somos</h2>
             <div class="about-content">
                 <div class="about-image">
-                    <img src="../resources/Images/Image1.png" alt="Nuestra Iglesia">
+                    <img src="../resources/Images/Image1.png" alt="Nuestra Iglesia" style="border-radius:16px;">
                 </div>
                 <div class="about-text">
                     <h3 class="about-title">Nuestra Misión</h3>
                     <p class="about-description">Casa de Adoración NJ es una comunidad cristiana dedicada a compartir el amor de Dios a través de la adoración, la enseñanza bíblica y el servicio a nuestra comunidad. Creemos en crear un ambiente donde todos puedan encontrar esperanza, sanidad y un sentido de pertenencia.</p>
                     <p class="about-description">Desde nuestra fundación, nos hemos comprometido a ser una luz en New Jersey, ofreciendo programas y ministerios que impactan positivamente a familias, jóvenes y a toda la comunidad.</p>
-                    <a href="#" class="btn">Conoce más sobre nosotros</a>
+                    <a href="{{ url('/about') }}" class="btn">Conoce más sobre nosotros</a>
                 </div>
             </div>
         </div>
@@ -107,16 +118,41 @@
             <h1 class="section-title">Salmo de la Semana</h1>
             <div class="psalm-content">
                 <div class="psalm-image">
-                    <img src="../resources/Images/Image1.png" alt="Salmo de la Semana">
+                    <img id="psalm-week-img" src="../resources/Images/Image1.png" alt="Salmo de la Semana" style="border-radius:16px;">
                 </div>
                 <div class="psalm-text">
-                    <h3 class="psalm-reference"></h3>
-                    <div class="psalm-quote"  style="color: #720E29"></div>
-                    <p class="psalm-reflection" style="color: #720E29">Este salmo nos recuerda que Dios es nuestro proveedor y protector. Cuando confiamos en Él como nuestro pastor, encontramos paz y renovación para nuestras almas. Esta semana, reflexionemos sobre cómo Dios nos guía y nos da descanso en medio de nuestras ocupadas vidas.</p>
-                    <a href="#" class="btn">Leer la reflexión completa</a>
+                    <h3 class="psalm-reference" style="color:#fff;"></h3>
+                    <div class="psalm-quote" style="color:#fff;"></div>
+                    <p class="psalm-reflection" style="color:#FF3B3F; font-style:italic;">Este salmo nos recuerda que Dios es nuestro proveedor y protector. Cuando confiamos en Él como nuestro pastor, encontramos paz y renovación para nuestras almas. Esta semana, reflexionemos sobre cómo Dios nos guía y nos da descanso en medio de nuestras ocupadas vidas.</p>
                 </div>
             </div>
         </div>
+        <script>
+        // Script para cargar el Salmo de la Semana desde localStorage
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                const salmo = JSON.parse(localStorage.getItem('salmoSemana'));
+                if (salmo && salmo.verses) {
+                    // Referencia
+                    document.querySelector('.psalm-reference').textContent = salmo.reference || '';
+                    // Texto del salmo
+                    document.querySelector('.psalm-quote').textContent = salmo.verses;
+                }
+                // Reflexión personalizada (si existe en localStorage)
+                const reflexion = localStorage.getItem('reflexionSalmoSemana');
+                if (reflexion) {
+                    document.querySelector('.psalm-reflection').textContent = reflexion;
+                }
+                // Imagen personalizada del salmo (si existe en localStorage)
+                const imgUrl = localStorage.getItem('imgSalmoSemana');
+                if (imgUrl) {
+                    document.getElementById('psalm-week-img').src = imgUrl;
+                }
+            } catch (e) {
+                // No hacer nada si hay error
+            }
+        });
+        </script>
     </section>
     
     <!-- Servicios -->
@@ -126,7 +162,7 @@
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-image">
-                        <img src="../resources/Images/Image1.png" alt="Servicio Dominical">
+                        <img src="../resources/Images/Image1.png" alt="Servicio Dominical" style="border-radius:16px;">
                     </div>
                     <div class="service-content">
                         <h3 class="service-title">Servicio Dominical</h3>
@@ -137,7 +173,7 @@
                 
                 <div class="service-card">
                     <div class="service-image">
-                        <img src="../resources/Images/Image1.png" alt="Estudio Bíblico">
+                        <img src="../resources/Images/Image1.png" alt="Estudio Bíblico" style="border-radius:16px;">
                     </div>
                     <div class="service-content">
                         <h3 class="service-title">Estudios Bíblicos</h3>
@@ -148,7 +184,7 @@
                 
                 <div class="service-card">
                     <div class="service-image">
-                        <img src="../resources/Images/Image1.png" alt="Ministerio de Jóvenes">
+                        <img src="../resources/Images/Image1.png" alt="Ministerio de Jóvenes" style="border-radius:16px;">
                     </div>
                     <div class="service-content">
                         <h3 class="service-title">Ministerio de Jóvenes</h3>
@@ -163,10 +199,33 @@
     <!-- Eventos -->
     <section class="events" id="eventos">
         <div class="container">
-            <h2 class="section-title">Próximos Eventos</h2>
+            <h2 class="section-title">Noticias</h2>
             <div class="events-container">
-                
-                
+                @php
+                    $eventos = \App\Models\Event::orderBy('date', 'asc')->whereDate('date', '>=', now())->get();
+                @endphp
+                @forelse($eventos as $event)
+                    <div class="event-card" style="background:#232323; border-radius:14px; box-shadow:0 2px 12px #FF3B3F22; margin-bottom:1.5rem; padding:1.5rem; color:#fff; display:flex; align-items:center; gap:1.5rem;">
+                        <div class="event-date" style="background:#FF3B3F; color:#fff; border-radius:10px; padding:1rem 1.2rem; text-align:center; min-width:70px;">
+                            <div class="event-day" style="font-size:2rem; font-weight:700;">{{ \Carbon\Carbon::parse($event->date)->format('d') }}</div>
+                            <div class="event-month" style="font-size:1.1rem;">{{ \Carbon\Carbon::parse($event->date)->translatedFormat('M') }}</div>
+                        </div>
+                        <div class="event-details" style="flex:1;">
+                            <h3 class="event-title" style="color:#FF3B3F; margin-bottom:0.3rem;">{{ $event->name }}</h3>
+                            <div class="event-info" style="margin-bottom:0.5rem;">
+                                <span class="event-time" style="margin-right:1.2rem;"><span class="event-icon">🕒</span> {{ $event->time }}</span>
+                                <span class="event-location"><span class="event-icon">📍</span> {{ $event->place }}</span>
+                            </div>
+                            <p class="event-description" style="margin-bottom:0.7rem;">{{ \Illuminate\Support\Str::limit($event->description, 80) }}</p>
+                            <a href="{{ route('event.detail', $event->id) }}" class="btn" style="background:#FF3B3F; color:#fff; margin-right:0.7rem;">Ver detalles</a>
+                            {{-- DEBUG: Mostrar valor del campo --}}
+                            {{-- <span style="color:yellow;">Valor: {{ var_export($event->show_register_button, true) }}</span> --}}
+                            {{-- Aviso de inscripción presencial eliminado por solicitud --}}
+                        </div>
+                    </div>
+                @empty
+                    <p>No hay eventos programados.</p>
+                @endforelse
             </div>
         </div>
     </section>
@@ -175,10 +234,18 @@
     <section class="gallery" id="galeria">
         <div class="container">
             <h2 class="section-title">Nuestra Galería</h2>
+            <div style="text-align:right; margin-bottom:1rem;">
+                <a href="{{ route('galerias.categorias') }}" class="btn" style="background:#395B64; color:#fff; padding:0.5rem 1.2rem; border-radius:6px;">Ver por categorías</a>
+            </div>
             <div class="gallery-grid">
                 @forelse($images as $image)
                     <div class="gallery-item">
-                        <img src="{{ asset('uploads/' . $image->filename) }}" alt="Imagen de galería">
+                        <a href="{{ route('galerias.categoria', ['categoria' => $image->categoria]) }}">
+                            <img src="{{ asset('uploads/' . $image->filename) }}" alt="Imagen de galería" style="border-radius:16px;">
+                        </a>
+                        <div style="font-size:0.95rem; color:#395B64; margin-top:0.3rem; text-align:center;">
+                            {{ ucfirst($image->categoria ?? 'Sin categoría') }}
+                        </div>
                         <div class="gallery-overlay">
                             <div class="gallery-icon">+</div>
                         </div>
@@ -195,14 +262,15 @@
         <div class="container">
             <h2 class="section-title">Transmisión en Vivo</h2>
             <div class="fb-video-container" style="display: flex; justify-content: center;">
-                <!-- Reemplaza 'tu_pagina' por el nombre de tu página de Facebook -->
+                <!-- Muestra la transmisión en vivo si hay, o el último video publicado si no hay en vivo -->
                 <iframe 
-                    src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FCasaDeAdoracionNJ%2Flive"
+                    src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FCasaDeAdoracionNJ&tabs=live,videos&width=500&height=280&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"
                     width="500" height="280" style="border:none;overflow:hidden" scrolling="no" frameborder="0"
                     allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
                 </iframe>
             </div>
-            <p style="text-align:center; margin-top:1rem;">
+            <p style="text-align:center; margin-top:1rem; color:#395B64;">
+                Si no hay transmisión en vivo, verás el último video publicado.<br>
                 <a href="https://www.facebook.com/CasaDeAdoracionNJ/live" target="_blank" class="btn">Ver en Facebook</a>
             </p>
         </div>
@@ -218,11 +286,12 @@
                     <div class="contact-details">
                         <div class="contact-item">
                             <div class="contact-icon">📍</div>
-                            <div>123 Calle Principal, Ciudad, NJ 12345</div>
+                            <div>Avenida 69 #251 entre 44 y 46 Colonia Cordemex. Frente a Gran Plaza, Mérida, México</div>
+                            <div id="map-contact" style="height:180px; width:100%; border-radius:12px; box-shadow:0 2px 8px #395B6444; margin-top:0.7rem;"></div>
                         </div>
                         <div class="contact-item">
                             <div class="contact-icon">📞</div>
-                            <div>(123) 456-7890</div>
+                            <div>(+52) 9991734714</div>
                         </div>
                         <div class="contact-item">
                             <div class="contact-icon">✉️</div>
@@ -248,196 +317,100 @@
                 </div>
                 
                 <div class="contact-form">
-                    <form action="#" method="POST">
+                    @if(session('success'))
+                        <div class="alert alert-success">{{ session('success') }}</div>
+                    @endif
+                    @if($errors->any())
+                        <div class="alert alert-error">
+                            @foreach($errors->all() as $error)
+                                <div>{{ $error }}</div>
+                            @endforeach
+                        </div>
+                    @endif
+                    <form action="{{ route('contacto.store') }}" method="POST">
+                        @csrf
                         <div class="form-group">
                             <label for="name" class="form-label">Nombre</label>
-                            <input type="text" id="name" name="name" class="form-control" required>
+                            <input type="text" id="name" name="name" class="form-control" required value="{{ old('name') }}">
                         </div>
-                        
                         <div class="form-group">
                             <label for="email" class="form-label">Correo Electrónico</label>
-                            <input type="email" id="email" name="email" class="form-control" required>
+                            <input type="email" id="email" name="email" class="form-control" required value="{{ old('email') }}">
                         </div>
-                        
                         <div class="form-group">
                             <label for="phone" class="form-label">Teléfono</label>
-                            <input type="tel" id="phone" name="phone" class="form-control">
+                            <input type="tel" id="phone" name="phone" class="form-control" value="{{ old('phone') }}">
                         </div>
-                        
                         <div class="form-group">
                             <label for="message" class="form-label">Mensaje</label>
-                            <textarea id="message" name="message" class="form-control" required></textarea>
+                            <textarea id="message" name="message" class="form-control" required>{{ old('message') }}</textarea>
                         </div>
-                        
                         <button type="submit" class="btn">Enviar Mensaje</button>
                     </form>
                 </div>
             </div>
         </div>
     </section>
-    
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div>
-                    <div class="footer-logo">
-                        <img src="../resources/Images/logo.webp" alt="Casa de Adoración Logo">
-                        <div class="footer-logo-text">Casa de Adoración NJ</div>
-                    </div>
-                    <p class="footer-description">Un lugar donde encontrarás fe, comunidad y esperanza para tu vida. Somos una iglesia comprometida con compartir el amor de Dios con todos.</p>
-                </div>
-                
-                <div>
-                    <h3 class="footer-title">Enlaces Rápidos</h3>
-                    <ul class="footer-links">
-                        <li class="footer-link"><a href="#inicio">Inicio</a></li>
-                        <li class="footer-link"><a href="#nosotros">Nosotros</a></li>
-                        <li class="footer-link"><a href="#salmo">Salmo de la Semana</a></li>
-                        <li class="footer-link"><a href="#servicios">Servicios</a></li>
-                        <li class="footer-link"><a href="#eventos">Eventos</a></li>
-                        <li class="footer-link"><a href="#galeria">Galería</a></li>
-                        <li class="footer-link"><a href="#transmision">Transmisión en Vivo</a></li>
-                        <li class="footer-link"><a href="#contacto">Contacto</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="footer-title">Contáctanos</h3>
-                    <ul class="footer-links">
-                        <li class="footer-link"><a href="mailto:info@casadeadoracionnj.com">info@casadeadoracionnj.com</a></li>
-                        <li class="footer-link"><a href="tel:+1234567890">(123) 456-7890</a></li>
-                        <li class="footer-link"><a href="#ubicacion">Ubicación</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 Casa de Adoración NJ. Todos los derechos reservados.</p>
-            </div>
-        </div>
-    </footer>
-    
+
+    <!-- Leaflet CSS y JS solo una vez -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
-        // JavaScript para manejar la navegación móvil y efectos de scroll
-        document.addEventListener('DOMContentLoaded', function() {
-            const header = document.querySelector('header');
-            const hamburger = document.querySelector('.hamburger');
-            const navMenu = document.querySelector('.nav-menu');
-            const navLinks = document.querySelectorAll('.nav-link');
-            
-            // Cambiar estilo de header al hacer scroll
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 100) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            });
-            
-            // Toggle menú móvil
-            hamburger.addEventListener('click', function() {
-                hamburger.classList.toggle('active');
-                navMenu.classList.toggle('active');
-            });
-            
-            // Cerrar menú al hacer click en un enlace
-            navLinks.forEach(function(navLink) {
-                navLink.addEventListener('click', function() {
-                    hamburger.classList.remove('active');
-                    navMenu.classList.remove('active');
-                });
-            });
-        });
+      document.addEventListener('DOMContentLoaded', function() {
+        if (document.getElementById('map-contact')) {
+          var mapContact = L.map('map-contact', {scrollWheelZoom:false, dragging:true, zoomControl:false, doubleClickZoom:false, boxZoom:false, keyboard:false, tap:false}).setView([21.032965, -89.624553], 17);
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+          }).addTo(mapContact);
+          var marker = L.marker([21.032965, -89.624553]).addTo(mapContact)
+            .bindPopup('Iglesia Nueva Jerusalén<br>(Misión) Asambleas de Dios');
+          var googleMapsUrl = 'https://www.google.com/maps/place/Iglesia+Nueva+Jerusal%C3%A9n+(Misi%C3%B3n)+Asambleas+de+Dios/@21.032965,-89.624553,18z/data=!4m6!3m5!1s0x8f56769d4ff8bdbf:0xb81b05c4ce563d15!8m2!3d21.032965!4d-89.6245534!16s%2Fg%2F11g6983ms_?hl=es-419&entry=ttu&g_ep=EgoyMDI1MDcwOC4wIKXMDSoASAFQAw%3D%3D';
+          marker.on('click', function() {
+            window.open(googleMapsUrl, '_blank');
+          });
+          mapContact.on('click', function() {
+            window.open(googleMapsUrl, '_blank');
+          });
+        }
+      });
     </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Obtén los datos del Salmo guardado en localStorage
-            const datos = localStorage.getItem('salmoSemana');
-            if (!datos) {
-                console.warn('No hay un Salmo guardado en localStorage.');
-                return;
-            }
-    
-            // Parsear los datos del Salmo
-            const { reference, book, verses } = JSON.parse(datos);
-    
-            // Seleccionar los elementos donde se mostrará el contenido
-            const refEl = document.querySelector('.psalm-reference');
-            const quoteEl = document.querySelector('.psalm-quote');
-    
-            // Insertar los datos en los elementos correspondientes
-            if (refEl) refEl.textContent = `${reference} - ${book}`;
-            if (quoteEl) {
-                quoteEl.innerHTML = ''; // Limpiar contenido previo
-                verses.split('\n\n').forEach(v => {
-                    const p = document.createElement('p');
-                    p.textContent = v;
-                    quoteEl.appendChild(p);
-                });
-            }
-        });
-    </script>
-    <script>
-document.addEventListener('DOMContentLoaded', function() {
-    fetch('/Test/public/admin/events')
-        .then(res => res.json())
-        .then(events => {
-            const eventsContainer = document.querySelector('.events-container');
-            if (!eventsContainer) return;
-            if (!events.length) {
-                eventsContainer.innerHTML = '<p>No hay eventos programados.</p>';
-                return;
-            }
-            eventsContainer.innerHTML = events.map(event => {
-                // Formatea la fecha
-                const dateObj = new Date(event.date);
-                const day = dateObj.getDate().toString().padStart(2, '0');
-                const month = dateObj.toLocaleString('es-ES', { month: 'short' });
-                return `
-                <div class="event-card">
-                    <div class="event-date">
-                        <div class="event-day">${day}</div>
-                        <div class="event-month">${month.charAt(0).toUpperCase() + month.slice(1)}</div>
-                    </div>
-                    <div class="event-details">
-                        <h3 class="event-title">${event.name}</h3>
-                        <div class="event-info">
-                            <div class="event-time"><span class="event-icon">🕒</span> ${event.time}</div>
-                            <div class="event-location"><span class="event-icon">📍</span> ${event.place}</div>
-                        </div>
-                        <p class="event-description">${event.description}</p>
-                        <a href="#" class="btn">Registrarse</a>
-                    </div>
-                </div>
-                `;
-            }).join('');
-        })
-        .catch(() => {
-            const eventsContainer = document.querySelector('.events-container');
-            if (eventsContainer) {
-                eventsContainer.innerHTML = '<p style="color:red;">No se pudieron cargar los eventos.</p>';
-            }
-        });
-});
+
+
+
+</body>
+</html>
+
 </script>
-@auth
+</body>
+
+<!-- Mapa interactivo Leaflet al final de la página principal -->
+
+</section>
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
-    // Guarda nombre y correo del usuario logueado en localStorage
-    localStorage.setItem('usuario', JSON.stringify({
-        name: @json(Auth::user()->name),
-        email: @json(Auth::user()->email)
-    }));
+    // Coordenadas exactas: 21.032965, -89.624553
+    document.addEventListener('DOMContentLoaded', function() {
+        var map = L.map('map').setView([21.032965, -89.624553], 18);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        var marker = L.marker([21.032965, -89.624553])
+            .addTo(map)
+            .bindPopup('Iglesia Nueva Jerusalén<br>(Misión) Asambleas de Dios')
+            .openPopup();
+        // Redirigir a Google Maps al hacer clic en el mapa o el marcador
+        var googleMapsUrl = 'https://www.google.com/maps/place/Iglesia+Nueva+Jerusal%C3%A9n+(Misi%C3%B3n)+Asambleas+de+Dios/@21.032965,-89.624553,18z/data=!4m6!3m5!1s0x8f56769d4ff8bdbf:0xb81b05c4ce563d15!8m2!3d21.032965!4d-89.6245534!16s%2Fg%2F11g6983ms_?hl=es-419&entry=ttu&g_ep=EgoyMDI1MDcwOC4wIKXMDSoASAFQAw%3D%3D';
+        map.on('click', function() {
+            window.open(googleMapsUrl, '_blank');
+        });
+        marker.on('click', function() {
+            window.open(googleMapsUrl, '_blank');
+        });
+    });
 </script>
-@endauth
-@guest
-<script>
-    // Si no hay usuario, elimina los datos guardados
-    localStorage.removeItem('usuario');
-    //DISEÑO MAS ACORDE AL LOGO
-    //quitar margen a nav-bar o barra superior
-</script>
-@endguest
 </body>
 </html>
 

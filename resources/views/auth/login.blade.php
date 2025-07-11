@@ -7,23 +7,24 @@
     <link rel="stylesheet" href="{{ asset('css/churchpage.css') }}">
     <style>
         body {
-            background: var(--color-secondary);
+            background: #181818 !important;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
         }
         .auth-container {
-            background: var(--color-light);
+            background: #232323;
             padding: 2.5rem 2rem;
             border-radius: 10px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.18);
             width: 100%;
             max-width: 350px;
+            color: #fff;
         }
         .auth-title {
             text-align: center;
-            color: var(--color-primary);
+            color: var(--main-red);
             margin-bottom: 1.5rem;
             font-size: 2rem;
             font-weight: 700;
@@ -32,33 +33,44 @@
             width: 100%;
             padding: 0.8rem;
             margin-bottom: 1.2rem;
-            border: 1px solid #ccc;
+            border: 1.5px solid #444;
             border-radius: 5px;
             font-size: 1rem;
-            background: var(--color-secondary);
+            background: #232323;
+            color: #fff;
+        }
+        .auth-form input:focus {
+            border-color: var(--main-red);
+            outline: none;
         }
         .auth-form button {
             width: 100%;
             padding: 0.8rem;
-            background: var(--color-accent);
-            color: var(--color-light);
+            background: var(--main-red);
+            color: #fff;
             border: none;
             border-radius: 5px;
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: background 0.2s, color 0.2s;
         }
         .auth-form button:hover {
-            background: var(--color-primary);
+            background: #181818;
+            color: var(--main-red);
+            border: 2px solid var(--main-red-dark);
         }
         .auth-link {
             display: block;
             text-align: center;
             margin-top: 1rem;
-            color: var(--color-primary);
+            color: var(--main-red);
             text-decoration: none;
             font-weight: 500;
+        }
+        .auth-link:hover {
+            color: #fff;
+            text-decoration: underline;
         }
         .auth-errors {
             background: #f8d7da;

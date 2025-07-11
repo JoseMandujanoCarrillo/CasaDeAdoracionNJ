@@ -15,15 +15,21 @@ class GalleryController extends Controller
     public function upload(Request $request)
     {
         $request->validate([
-            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:4096'
+            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:4096',
+            'categoria' => 'required|string',
         ]);
+
+        $categoria = $request->input('categoria', 'especiales');
 
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $file) {
                 $filename = uniqid() . '_' . $file->getClientOriginalName();
                 $file->move(public_path('uploads'), $filename);
 
-                Gallery::create(['filename' => $filename]);
+                Gallery::create([
+                    'filename' => $filename,
+                    'categoria' => $categoria,
+                ]);
             }
         }
 
