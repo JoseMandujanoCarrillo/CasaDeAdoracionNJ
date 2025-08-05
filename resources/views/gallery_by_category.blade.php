@@ -8,7 +8,18 @@
         body { background: #181818; font-family: 'Montserrat', Arial, sans-serif; }
         .container { max-width: 1100px; margin: 2rem auto; background: #232323; border-radius: 18px; box-shadow: 0 4px 24px #FF3B3F22; padding: 2.5rem 2rem; }
         .main-title { font-size:2.3rem; color:#FF3B3F; margin-bottom:2rem; font-weight:700; letter-spacing:1px; text-align:center; }
-        .category-title { font-size:1.4rem; color:#fff; background:#FF3B3F; padding:0.7rem 1.5rem; border-radius:8px; margin:2.5rem 0 1.2rem 0; display:inline-block; box-shadow:0 2px 8px #FF3B3F22; font-weight:600; }
+        .category-title {
+            font-size: 1.4rem;
+            color: #fff;
+            background: none !important;
+            padding: 0;
+            border-radius: 0;
+            margin: 2.5rem 0 1.2rem 0;
+            display: block;
+            box-shadow: none;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
         .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; }
         .gallery-item { background:#181818; border-radius:14px; box-shadow:0 2px 12px #FF3B3F12; overflow:hidden; transition:transform 0.18s, box-shadow 0.18s; position:relative; display:flex; flex-direction:column; align-items:center; border:1.5px solid #FF3B3F; }
         .gallery-item:hover { transform:translateY(-6px) scale(1.03); box-shadow:0 6px 24px #FF3B3F44; border-color:#C62828; }
@@ -27,12 +38,58 @@
         <div class="main-title">Galerías por Categoría</div>
         <a href="{{ url('/') }}" class="btn">Volver a inicio</a>
         @forelse($imagenesPorCategoria as $categoria => $imagenes)
-            <div class="category-title">{{ ucfirst($categoria) }}</div>
+            @php
+                $icon = '';
+                $bg = '';
+                $catName = ucfirst($categoria);
+                switch(strtolower($categoria)) {
+                    case 'niños':
+                        $icon = 'fa-child';
+                        $bg = 'background:linear-gradient(90deg,#ffb347,#ffcc33);color:#232323;';
+                        $catName = 'Niños';
+                        break;
+                    case 'hombres':
+                        $icon = 'fa-mars';
+                        $bg = 'background:linear-gradient(90deg,#2193b0,#6dd5ed);color:#fff;';
+                        $catName = 'Hombres';
+                        break;
+                    case 'mujeres':
+                        $icon = 'fa-venus';
+                        $bg = 'background:linear-gradient(90deg,#ee9ca7,#ffdde1);color:#232323;';
+                        $catName = 'Mujeres';
+                        break;
+                    case 'especiales':
+                        $icon = 'fa-star';
+                        $bg = 'background:linear-gradient(90deg,#f7971e,#ffd200);color:#232323;';
+                        $catName = 'Especiales';
+                        break;
+                    default:
+                        $icon = 'fa-images';
+                        $bg = 'background:#FF3B3F;color:#fff;';
+                        break;
+                }
+            @endphp
+            <div class="category-title">
+                <i class="fas {{ $icon }}" style="margin-right:0.7rem;"></i> {{ $catName }}
+            </div>
             <div class="gallery-grid">
                 @foreach($imagenes as $image)
                     <div class="gallery-item">
                         <img src="{{ asset('uploads/' . $image->filename) }}" alt="Imagen de galería">
-                        <div class="cat-label">{{ ucfirst($image->categoria ?? 'Sin categoría') }}</div>
+                        <div class="cat-label">
+                            @php
+                                $imgIcon = '';
+                                $imgCat = strtolower($image->categoria ?? '');
+                                switch($imgCat) {
+                                    case 'niños': $imgIcon = 'fa-child'; break;
+                                    case 'hombres': $imgIcon = 'fa-mars'; break;
+                                    case 'mujeres': $imgIcon = 'fa-venus'; break;
+                                    case 'especiales': $imgIcon = 'fa-star'; break;
+                                    default: $imgIcon = 'fa-image'; break;
+                                }
+                            @endphp
+                            <i class="fas {{ $imgIcon }}" style="margin-right:0.4rem;"></i> {{ ucfirst($image->categoria ?? 'Sin categoría') }}
+                        </div>
                         <a href="{{ route('galerias.categoria', ['categoria' => $categoria]) }}" class="view-btn">Ver categoría</a>
                     </div>
                 @endforeach

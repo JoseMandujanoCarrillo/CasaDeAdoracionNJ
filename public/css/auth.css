@@ -1,0 +1,105 @@
+/* auth.css: Estilos exclusivos para login y registro, sin difuminados ni overlays */
+
+body {
+    background: url('../../resources/Images/FB.webp') no-repeat center center fixed !important;
+    background-size: cover !important;
+    background-color: #00000031 !important; /* Fondo oscuro */
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Montserrat', Arial, sans-serif;
+    color: #e63247;
+}
+.auth-container {
+    background: rgba(0, 0, 0, 0.463); /* Fondo claro y translúcido */
+    padding: 2.5rem 2rem;
+    border-radius: 14px;
+    box-shadow: 0 4px 24px rgba(230,50,71,0.18);
+    width: 100%;
+    max-width: 350px;
+    color: #e63247;
+    border: 2px solid #e63247;
+    backdrop-filter: none;
+}
+.auth-title {
+    text-align: center;
+    color: #e63247;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    font-weight: 700;
+    text-shadow: 0 2px 12px rgba(206, 26, 47, 0.18), 0 1px 0 #fff8;
+    letter-spacing: 0.5px;
+}
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.auth-form input {
+    width: 94%;
+    max-width: 290px;
+    min-width: 120px;
+    box-sizing: border-box;
+    padding: 0.8rem;
+    margin-bottom: 1.2rem;
+    border: 2px solid #e63247;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: #fff;
+    color: #e63247;
+    transition: border 0.2s;
+    text-shadow: none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.auth-form input:focus {
+    border-color: #e63247;
+    outline: none;
+    background: #fff8;
+    color: #e63247;
+    font-weight: 700;
+}
+.auth-form button {
+    width: 100%;
+    padding: 0.8rem;
+    background: #e63247;
+    color: #fff;
+    border: 2px solid #e63247;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 2px 16px rgba(206, 26, 47, 0.18), 0 1.5px 8px rgba(255,255,255,0.08);
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.auth-form button:hover {
+    background: #fff;
+    color: #e63247;
+    border: 2px solid #e63247;
+    box-shadow: 0 4px 24px rgba(206, 26, 47, 0.18);
+}
+.auth-link {
+    display: block;
+    text-align: center;
+    margin-top: 1rem;
+    color: #e63247;
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 0.2s;
+}
+.auth-link:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+.auth-errors {
+    background: #f8d7da;
+    color: #e63247;
+    border: 2px solid #e63247;
+    border-radius: 8px;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+}

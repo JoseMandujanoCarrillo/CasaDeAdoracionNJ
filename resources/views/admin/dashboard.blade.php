@@ -1,3 +1,4 @@
+<!-- Eliminado bloque duplicado de eventos y tabla de registros aquí. Todo va dentro de admin-content abajo. -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -9,410 +10,43 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 <!-- Cambia el bloque <style> en dashboard.blade.php por esto -->
-<style>
-    :root {
-        --primary-color: #FF3B3F; /* Rojo vivo */
-        --primary-dark: #C62828; /* Rojo oscuro */
-        --secondary-color: #181818;
-        --accent-color: #FFB3B3; /* Rojo claro/acento */
-        --danger-color: #ef4444;
-        --warning-color: #f59e0b;
-        --text-primary: #fff;
-        --text-secondary: #FF3B3F;
-        --border-color: #FF3B3F;
-        --shadow-sm: 0 2px 8px rgba(255,59,63,0.07);
-        --shadow-md: 0 2px 12px rgba(255,59,63,0.08);
-        --shadow-lg: 0 4px 16px rgba(255,59,63,0.15);
-        --shadow-xl: 0 2px 12px rgba(255,59,63,0.10);
-        --gradient: linear-gradient(135deg, #FF3B3F 0%, #FFB3B3 100%);
-        --glass-bg: #232323;
-        --glass-border: #FF3B3F;
-    }
-    .section { display: none; }
-    .section.active { display: block; }
-
-    body {
-        font-family: 'Montserrat', Arial, sans-serif;
-        background: var(--secondary-color);
-        color: var(--text-primary);
-        line-height: 1.6;
-        padding: 1rem;
-    }
-
-    .admin-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        background: var(--glass-bg);
-        border: 1.5px solid var(--glass-border);
-        border-radius: 18px;
-        box-shadow: var(--shadow-lg);
-        overflow: hidden;
-        animation: slideUp 0.6s ease-out;
-    }
-
-    .admin-header {
-        background: var(--primary-color);
-        padding: 2rem;
-        color: #fff;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .admin-title {
-        font-size: 2.2rem;
-        font-weight: 700;
-        font-family: 'Lora', serif;
-        margin-bottom: 0.5rem;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        position: relative;
-        z-index: 1;
-    }
-
-    .admin-subtitle {
-        font-size: 1.1rem;
-        opacity: 0.9;
-        position: relative;
-        z-index: 1;
-    }
-
-    .admin-nav {
-        background: #232323;
-        padding: 0;
-        border-bottom: 1.5px solid var(--border-color);
-        display: flex;
-        overflow-x: auto;
-    }
-
-    .nav-item {
-        padding: 1rem 2rem;
-        cursor: pointer;
-        border-bottom: 3px solid transparent;
-        transition: all 0.3s ease;
-        font-weight: 500;
-        white-space: nowrap;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        color: #fff;
-        font-family: 'Montserrat', Arial, sans-serif;
-    }
-
-    .nav-item:hover {
-        background: var(--accent-color);
-        color: #fff;
-    }
-
-    .nav-item.active {
-        background: var(--primary-color);
-        color: #fff;
-    }
-
-    .admin-content {
-        padding: 2rem;
-    }
-
-    .section-title {
-        font-family: 'Lora', serif;
-        font-size: 2rem;
-        color: var(--primary-color);
-        margin-bottom: 2rem;
-        font-weight: 700;
-    }
-
-    .btn {
-        background: var(--primary-color);
-        color: #fff;
-        padding: 0.7rem 1.5rem;
-        border-radius: 25px;
-        font-weight: 600;
-        border: none;
-        cursor: pointer;
-        transition: background 0.2s;
-        font-size: 1rem;
-        box-shadow: var(--shadow-sm);
-    }
-
-    .btn-outline {
-        background: transparent;
-        border: 2px solid var(--primary-color);
-        color: var(--primary-color);
-    }
-
-    .btn:hover,
-    .btn-outline:hover {
-        background: #181818;
-        color: var(--primary-color);
-        border: 2px solid var(--primary-dark);
-    }
-
-    .card {
-        background: #232323;
-        border-radius: 16px;
-        box-shadow: var(--shadow-md);
-        margin-bottom: 2rem;
-        overflow: hidden;
-        border: 1.5px solid var(--border-color);
-        transition: all 0.3s ease;
-    }
-
-    .card-header {
-        padding: 1.5rem;
-        background: var(--secondary-color);
-        border-bottom: 1px solid var(--border-color);
-        font-weight: 600;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .card-body {
-        padding: 1.5rem;
-    }
-    .stats-grid {
-    display: flex;
-    gap: 2rem;
-    margin-bottom: 2rem;
-}
-.stat-card {
-    flex: 1;
-    background: var(--accent-color);
-    color: var(--primary-dark);
-    border-radius: 16px;
-    padding: 2rem 1.5rem;
-    text-align: center;
-    box-shadow: var(--shadow-sm);
-    font-family: 'Montserrat', Arial, sans-serif;
-}
-.stat-value {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-}
-.stat-label {
-    font-size: 1.1rem;
-    opacity: 0.8;
-}
-
-/* Gallery Grid */
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1.5rem;
-}
-.gallery-item {
-    position: relative;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: var(--shadow-sm);
-    background: #232323;
-    transition: transform 0.2s;
-}
-.gallery-item img {
-    width: 100%;
-    display: block;
-    border-radius: 12px;
-}
-.gallery-item:hover {
-    transform: translateY(-4px) scale(1.03);
-    box-shadow: var(--shadow-md);
-}
-.gallery-overlay {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(57,91,100,0.7);
-    color: #fff;
-    opacity: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 0.2s;
-}
-.gallery-item:hover .gallery-overlay {
-    opacity: 1;
-}
-.btn-danger.btn-sm {
-    padding: 0.3rem 0.8rem;
-    font-size: 0.95rem;
-    border-radius: 16px;
-    background: var(--danger-color);
-    color: #fff;
-    border: none;
-    cursor: pointer;
-}
-.btn-danger.btn-sm:hover {
-    background: #b91c1c;
-}
-
-/* Alerts */
-.alert {
-    padding: 1rem 1.5rem;
-    border-radius: 8px;
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    font-size: 1rem;
-    background: #181818;
-    color: #fff;
-    border: 1.5px solid var(--primary-color);
-}
-.alert-success {
-    background: #232323;
-    color: #4ade80;
-    border-color: #4ade80;
-}
-.alert-error {
-    background: #232323;
-    color: var(--danger-color);
-    border-color: var(--danger-color);
-}
-
-/* Upload Area */
-.upload-area {
-    border: 2px dashed var(--primary-color);
-    border-radius: 12px;
-    padding: 2rem;
-    text-align: center;
-    background: #181818;
-    cursor: pointer;
-    transition: border-color 0.2s, background 0.2s;
-    margin-bottom: 1rem;
-    color: var(--primary-color);
-    font-weight: 600;
-}
-.upload-area.dragover {
-    border-color: var(--primary-dark);
-    background: #232323;
-    color: var(--primary-dark);
-}
-.upload-icon {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-    color: var(--primary-color);
-}
-
-/* Psalm Viewer */
-.psalm-viewer {
-    background: #232323;
-    border-radius: 16px;
-    box-shadow: var(--shadow-sm);
-    padding: 2rem;
-    margin-bottom: 2rem;
-}
-.psalm-header h2 {
-    font-family: 'Lora', serif;
-    color: var(--primary-color);
-    margin-bottom: 0.5rem;
-}
-.psalm-controls {
-    display: flex;
-    gap: 1.5rem;
-    align-items: flex-end;
-    margin-bottom: 1.5rem;
-    flex-wrap: wrap;
-}
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-    margin-bottom: 0.5rem;
-}
-.form-label {
-    font-weight: 600;
-    color: var(--primary-color);
-}
-.form-input, .form-select, textarea.form-input {
-    padding: 0.7rem 1rem;
-    border: 1.5px solid var(--border-color);
-    border-radius: 8px;
-    font-size: 1rem;
-    font-family: 'Montserrat', Arial, sans-serif;
-    background: #232323;
-    color: var(--text-primary);
-    outline: none;
-    transition: border-color 0.2s;
-}
-.form-input:focus, .form-select:focus, textarea.form-input:focus {
-    border-color: var(--primary-color);
-}
-.psalm-content {
-    background: #232323;
-    border-radius: 8px;
-    padding: 1.5rem;
-    min-height: 80px;
-    font-size: 1.1rem;
-    color: var(--text-secondary);
-    white-space: pre-line;
-}
-.psalm-content.loading {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 80px;
-}
-.spinner {
-    border: 4px solid #e5e7eb;
-    border-top: 4px solid var(--primary-color);
-    border-radius: 50%;
-    width: 32px;
-    height: 32px;
-    animation: spin 1s linear infinite;
-}
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-/* Responsive */
-@media (max-width: 900px) {
-    .stats-grid {
-        flex-direction: column;
-        gap: 1rem;
-    }
-    .psalm-controls {
-        flex-direction: column;
-        gap: 1rem;
-    }
-    .gallery-grid {
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    }
-}
-
-    /* ...mantén el resto de estilos y adapta colores si es necesario... */
-</style>
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 </head>
 <body>
     <script>
 document.addEventListener('DOMContentLoaded', function() {
-    let user = null;
-    try {
-        user = JSON.parse(localStorage.getItem('usuario'));
-    } catch (e) {
-        user = null;
-    }
+    // Refuerzo: limpiar localStorage['usuario'] al cerrar sesión
+    // Busca enlaces o botones de logout y limpia el usuario
+    const logoutLinks = Array.from(document.querySelectorAll('a,button')).filter(el => {
+        return (el.href && el.href.match(/logout/i)) || (el.onclick && el.onclick.toString().match(/logout/i)) || (el.innerText && el.innerText.match(/cerrar sesión|logout/i));
+    });
+    logoutLinks.forEach(el => {
+        el.addEventListener('click', function() {
+            localStorage.removeItem('usuario');
+        });
+    });
 
-    // Fallback: Si user es null pero hay sesión Laravel, lo reconstruimos desde Blade
-    if (!user || !user.email || !user.perfil) {
-        // Blade inyecta datos si hay sesión activa
-        const bladeUser = {
-            @auth
-            email: @json(auth()->user()->email),
-            perfil: @json(auth()->user()->perfil ?? (auth()->user()->role ?? '')),
-            name: @json(auth()->user()->name),
-            id: @json(auth()->user()->id)
-            @else
-            email: null,
-            perfil: null,
-            name: null,
-            id: null
-            @endauth
-        };
-        // Si hay email y perfil, lo guardamos en localStorage
-        if (bladeUser.email && bladeUser.perfil) {
-            localStorage.setItem('usuario', JSON.stringify(bladeUser));
-            user = bladeUser;
-        }
+    // Siempre reconstruir el usuario desde Blade (Laravel) si hay sesión, y sobrescribir localStorage
+    const bladeUser = {
+        @auth
+        email: @json(auth()->user()->email),
+        perfil: @json(auth()->user()->perfil ?? (auth()->user()->role ?? '')),
+        name: @json(auth()->user()->name),
+        id: @json(auth()->user()->id)
+        @else
+        email: null,
+        perfil: null,
+        name: null,
+        id: null
+        @endauth
+    };
+    if (bladeUser.email && bladeUser.perfil) {
+        localStorage.setItem('usuario', JSON.stringify(bladeUser));
+        user = bladeUser;
+    } else {
+        // Si no hay sesión, limpiar localStorage
+        localStorage.removeItem('usuario');
+        user = null;
     }
 
     // DEBUG oculto: Solo en consola, no en pantalla
@@ -434,49 +68,122 @@ document.addEventListener('DOMContentLoaded', function() {
                 <i class="fas fa-tachometer-alt"></i>
                 Panel de Administración
             </div>
-            <div class="admin-subtitle">Gestiona el contenido de tu sitio web</div>
-            <div id="user-info" style="position:absolute; top:2rem; right:2rem; color:#232323; font-size:1rem;">
-    <!-- Aquí se mostrará el correo -->
-</div>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const user = JSON.parse(localStorage.getItem('usuario'));
-    if (user && user.email) {
-        document.getElementById('user-info').textContent = user.email;
-    } else {
-        document.getElementById('user-info').textContent = '';
-    }
-});
-</script>
+            <div class="admin-header-right" style="display:flex; align-items:center; gap:1.2rem;">
+                <button onclick="window.location.href='/church/public/'" id="btn-volver-inicio" style="margin-top:0.2rem; margin-bottom:0.2rem; background:#181818; color:#fff; border:2px solid #181818; font-weight:600; border-radius:25px; padding:0.7rem 1.5rem; transition:background 0.2s, color 0.2s; cursor:pointer;">
+                    <i class="fas fa-arrow-left"></i> Volver al Inicio
+                </button>
+                <div id="user-info" style="color:#232323; font-size:1rem;"></div>
+            </div>
+            <style>
+            #btn-volver-inicio:hover {
+                background: #FF3B3F !important;
+                color: #181818 !important;
+                border: 2px solid #181818 !important;
+            }
+            </style>
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const user = JSON.parse(localStorage.getItem('usuario'));
+                if (user && user.email) {
+                    document.getElementById('user-info').textContent = user.email;
+                } else {
+                    document.getElementById('user-info').textContent = '';
+                }
+            });
+            </script>
         </div>
 
         <!-- Navigation -->
     <div class="admin-nav">
-        <div class="nav-item active" data-section="dashboard">
-            <i class="fas fa-home"></i>
-            Dashboard
-        </div>
-        <div class="nav-item" data-section="gallery">
-            <i class="fas fa-images"></i>
-            Galería
-        </div>
-        <div class="nav-item" data-section="psalms">
-            <i class="fas fa-book-open"></i>
-            Salmos
-        </div>
-        <div class="nav-item" data-section="settings">
-            <i class="fas fa-cog"></i>
-            Configuración
-        </div>
-        <div class="nav-item" data-section="events">
-            <i class="fas fa-calendar-alt"></i>
-            Noticias
-        </div>
-        <div class="nav-item" data-section="contacto">
-            <i class="fas fa-envelope"></i>
-            Contacto
-        </div>
+        @php
+            $perfil = null;
+            if (auth()->check()) {
+                $perfil = auth()->user()->perfil ?? (auth()->user()->role ?? null);
+            } else if (isset($_COOKIE['usuario'])) {
+                $userCookie = json_decode($_COOKIE['usuario'], true);
+                $perfil = $userCookie['perfil'] ?? null;
+            }
+        @endphp
+        @if($perfil === 'Admin')
+            <div class="nav-item active" data-section="dashboard"><i class="fas fa-home"></i>Dashboard</div>
+            <div class="nav-item" data-section="gallery"><i class="fas fa-images"></i>Galería</div>
+            <div class="nav-item" data-section="psalms"><i class="fas fa-book-open"></i>Salmos</div>
+            <div class="nav-item" data-section="settings"><i class="fas fa-cog"></i>Configuración</div>
+            <div class="nav-item" data-section="events"><i class="fas fa-calendar-alt"></i>Noticias</div>
+            <div class="nav-item" data-section="contacto"><i class="fas fa-envelope"></i>Contacto</div>
+        @elseif($perfil === 'Salmos')
+            <div class="nav-item active" data-section="psalms"><i class="fas fa-book-open"></i>Salmos</div>
+        @elseif($perfil === 'Gestor')
+            <div class="nav-item active" data-section="dashboard"><i class="fas fa-home"></i>Dashboard</div>
+            <div class="nav-item" data-section="settings"><i class="fas fa-cog"></i>Configuración</div>
+        @elseif($perfil === 'Galeria')
+            <div class="nav-item active" data-section="gallery"><i class="fas fa-images"></i>Galería</div>
+        @elseif($perfil === 'Eventos')
+            <div class="nav-item active" data-section="events"><i class="fas fa-calendar-alt"></i>Noticias</div>
+        @endif
     </div>
+
+    <script>
+    // Navegación de pestañas: solo permite navegar entre las permitidas y redirige a la pestaña correcta al cargar
+    document.addEventListener('DOMContentLoaded', function() {
+        let user = null;
+        try {
+            user = JSON.parse(localStorage.getItem('usuario'));
+        } catch (e) {}
+        const navItems = document.querySelectorAll('.admin-nav .nav-item');
+        const sections = document.querySelectorAll('.section');
+        // Oculta y desactiva todas las secciones
+        navItems.forEach(i => i.classList.remove('active'));
+        sections.forEach(sec => sec.classList.remove('active'));
+
+        // Determina la sección permitida según el perfil
+        let allowedSection = null;
+        if (user && user.perfil) {
+            if (user.perfil === 'Admin') allowedSection = 'dashboard';
+            else if (user.perfil === 'Salmos') allowedSection = 'psalms';
+            else if (user.perfil === 'Gestor') allowedSection = 'dashboard';
+            else if (user.perfil === 'Galeria') allowedSection = 'gallery';
+            else if (user.perfil === 'Eventos') allowedSection = 'events';
+        }
+        // Activa solo la sección y pestaña permitida
+        if (allowedSection) {
+            const nav = document.querySelector('.admin-nav .nav-item[data-section="'+allowedSection+'"]');
+            const sec = document.getElementById(allowedSection);
+            if (nav) nav.classList.add('active');
+            if (sec) sec.classList.add('active');
+        }
+
+        // Solo permite click en la pestaña permitida (o todas si es Admin)
+        navItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                if (user && user.perfil === 'Admin') {
+                    // Admin puede navegar entre todas
+                    navItems.forEach(i => i.classList.remove('active'));
+                    sections.forEach(sec => sec.classList.remove('active'));
+                    item.classList.add('active');
+                    const sec = document.getElementById(item.getAttribute('data-section'));
+                    if (sec) sec.classList.add('active');
+                } else {
+                    // Otros perfiles: solo puede activar su pestaña
+                    if (item.classList.contains('active')) {
+                        // Ya está activa, no hace nada
+                        return;
+                    } else {
+                        // Redirige a la permitida
+                        if (allowedSection) {
+                            const nav = document.querySelector('.admin-nav .nav-item[data-section="'+allowedSection+'"]');
+                            const sec = document.getElementById(allowedSection);
+                            navItems.forEach(i => i.classList.remove('active'));
+                            sections.forEach(sec => sec.classList.remove('active'));
+                            if (nav) nav.classList.add('active');
+                            if (sec) sec.classList.add('active');
+                        }
+                    }
+                }
+            });
+        });
+    });
+    </script>
             <!-- Contacto Section -->
             <div id="contacto" class="section">
                 <div class="section-header">
@@ -736,7 +443,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <label class="form-label" for="psalmRef">Referencia</label>
                 <div style="display: flex; align-items: center;">
                     <span style="padding: 0.75rem 1rem; background: #232323; border: 2px solid var(--border-color); border-radius: 8px 0 0 8px; font-weight: bold;">psa.</span>
-                    <input type="text" class="form-input" id="psalmRef" value="1" placeholder="Ej: 1" style="border-radius: 0 8px 8px 0; border-left: none;">
+                <input type="text" class="form-input" id="psalmRef" placeholder="Ej: 1" style="border-radius: 0 8px 8px 0; border-left: none;">
                 </div>
             </div>
             
@@ -877,7 +584,29 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
 
                 document.addEventListener('DOMContentLoaded', function() {
-                    fetchPsalm(psalmRefInput.value, psalmType.value);
+                    // Restaurar último salmo consultado (referencia, tipo y contenido) desde localStorage
+                    let lastPsalm = null;
+                    try {
+                        lastPsalm = JSON.parse(localStorage.getItem('salmoSemana'));
+                    } catch(e) { lastPsalm = null; }
+                    if (lastPsalm && lastPsalm.reference && lastPsalm.verses) {
+                        // Detectar tipo de búsqueda según el formato de referencia
+                        let type = 'capitulo';
+                        let ref = lastPsalm.reference.replace(/^psa\./i, '');
+                        if (/\d+\.\d+-psa\.\d+\.\d+/.test(ref)) type = 'rango';
+                        else if (/\d+\.\d+/.test(ref)) type = 'versiculo';
+                        else type = 'capitulo';
+                        psalmType.value = type;
+                        psalmRefInput.value = ref;
+                        psalmRefInput.placeholder = type === 'capitulo' ? 'Ej: 1' : (type === 'versiculo' ? 'Ej: 1.3' : 'Ej: 1.3-psa.1.5');
+                        psalmContent.textContent = lastPsalm.verses;
+                        currentPsalmText = lastPsalm.verses;
+                    } else {
+                        psalmType.value = 'capitulo';
+                        psalmRefInput.value = '1';
+                        psalmRefInput.placeholder = 'Ej: 1';
+                        fetchPsalm('1', 'capitulo');
+                    }
                 });
             </script>
             
@@ -937,6 +666,52 @@ document.addEventListener('DOMContentLoaded', function() {
         Haz clic en <b>Crear Noticia</b> para añadir una nueva.</div>
     </div>
     <div id="events-list"></div>
+
+    @php
+        use App\Models\Event;
+        $eventos = Event::with('registrations')->orderBy('created_at', 'desc')->get(); // Orden descendente: más reciente arriba
+    @endphp
+
+    @if(isset($perfil) && $perfil === 'Admin')
+    <div class="card" style="margin-top:2.5rem;">
+        <div class="card-header" style="color:#FF3B3F; font-weight:700; font-size:1.2rem;">
+            <i class="fas fa-users"></i> Personas registradas en eventos
+        </div>
+        <div class="card-body" style="overflow-x:auto;">
+            @forelse($eventos as $ev)
+                @if($ev->registrations && count($ev->registrations))
+                    <div style="margin-bottom:2.2rem;">
+                        <div style="font-weight:600; color:#FF3B3F; font-size:1.08rem; margin-bottom:0.5rem;">
+                            <i class="fas fa-calendar-alt"></i> {{ $ev->name }} ({{ \Carbon\Carbon::parse($ev->date)->format('d/m/Y') }})
+                        </div>
+                        <table style="width:100%; border-collapse:collapse;">
+                            <thead>
+                                <tr style="background:#232323; color:#FF3B3F;">
+                                    <th style="padding:8px; text-align:left; border-bottom:1px solid #e5e7eb;">Nombre</th>
+                                    <th style="padding:8px; text-align:left; border-bottom:1px solid #e5e7eb;">Correo</th>
+                                    <th style="padding:8px; text-align:left; border-bottom:1px solid #e5e7eb;">Teléfono</th>
+                                    <th style="padding:8px; text-align:left; border-bottom:1px solid #e5e7eb;">Fecha de registro</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($ev->registrations as $reg)
+                                    <tr>
+                                        <td style="padding:8px; border-bottom:1px solid #e5e7eb;">{{ $reg->name }}</td>
+                                        <td style="padding:8px; border-bottom:1px solid #e5e7eb;">{{ $reg->email }}</td>
+                                        <td style="padding:8px; border-bottom:1px solid #e5e7eb;">{{ $reg->phone }}</td>
+                                        <td style="padding:8px; border-bottom:1px solid #e5e7eb;">{{ $reg->created_at ? \Carbon\Carbon::parse($reg->created_at)->format('d/m/Y H:i') : '' }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @endif
+            @empty
+                <div style="color:#b91c1c;">No hay registros de eventos.</div>
+            @endforelse
+        </div>
+    </div>
+    @endif
 
     <!-- Modal para crear/editar evento -->
     <div id="event-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4); align-items:center; justify-content:center; z-index:9999;">
@@ -1026,13 +801,12 @@ input:checked + .slider:before {
             eventModal = document.getElementById('event-modal');
             eventForm = document.getElementById('event-form');
             csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            fetchEvents();
-        });
-
         function fetchEvents() {
             fetch('/church/public/admin/events')
                 .then(res => res.json())
                 .then(events => {
+                    // Ordenar eventos por fecha descendente (más nuevo arriba)
+                    events.sort((a, b) => new Date(b.date) - new Date(a.date));
                     const list = document.getElementById('events-list');
                     if (!list) return;
                     if (!events.length) {
@@ -1055,9 +829,6 @@ input:checked + .slider:before {
                                 </div>
                                 <p class="event-description" style="margin-bottom:0.7rem;">${event.description}</p>
                                 <div style="margin-bottom:0.7rem;">
-                                    <span style="font-size:0.98rem; color:#FFB3B3;">
-                                        Botón "Registrarse": <b>${showRegister}</b>
-                                    </span>
                                 </div>
                                 <button class="btn btn-outline" onclick="editEvent(${event.id})">Editar</button>
                                 <button class="btn btn-danger btn-sm" onclick="deleteEvent(${event.id})">Eliminar</button>
@@ -1067,13 +838,22 @@ input:checked + .slider:before {
                     }).join('');
                 });
         }
-
-        function formatDate(dateStr, part = null) {
-            const d = new Date(dateStr);
-            if (part === 'day') return d.getDate().toString().padStart(2, '0');
-            if (part === 'month') return d.toLocaleString('es-ES', { month: 'short' }).charAt(0).toUpperCase() + d.toLocaleString('es-ES', { month: 'short' }).slice(1);
-            return d.toLocaleDateString('es-ES');
+                            </div>
+                        </div>
+                        `;
+                    }).join('');
+                });
         }
+
+function formatDate(dateStr, part = null) {
+    // Crear la fecha como local (no UTC) para evitar desfase de un día
+    if (!dateStr) return '';
+    const [year, month, day] = dateStr.split('-').map(Number);
+    const d = new Date(year, month - 1, day); // Mes base 0, local time
+    if (part === 'day') return d.getDate().toString().padStart(2, '0');
+    if (part === 'month') return d.toLocaleString('es-ES', { month: 'short' }).charAt(0).toUpperCase() + d.toLocaleString('es-ES', { month: 'short' }).slice(1);
+    return d.toLocaleDateString('es-ES');
+}
 
         function showEventForm(event = null) {
             eventModal.style.display = 'flex';
@@ -1203,68 +983,9 @@ input:checked + .slider:before {
 
         // Drag and drop functionality mejorada con selección de categoría
         const uploadArea = document.querySelector('.upload-area');
-        const fileInput = document.getElementById('fileInput');
-        const uploadForm = document.querySelector('.upload-form');
-        const categoriaSelect = document.getElementById('categoria');
-        const categoriaModal = document.getElementById('categoriaModal');
-        const modalCategoria = document.getElementById('modalCategoria');
-        const confirmCategoriaBtn = document.getElementById('confirmCategoriaBtn');
-        const cancelCategoriaBtn = document.getElementById('cancelCategoriaBtn');
-        let filesToUpload = null;
-
-        function showCategoriaModal(callback) {
-            if (!categoriaModal) return;
-            categoriaModal.style.display = 'flex';
-            confirmCategoriaBtn.onclick = function() {
-                categoriaSelect.value = modalCategoria.value;
-                categoriaModal.style.display = 'none';
-                if (callback) callback();
-            };
-            cancelCategoriaBtn.onclick = function() {
-                categoriaModal.style.display = 'none';
-                filesToUpload = null;
-            };
-        }
-
-        uploadArea.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            uploadArea.classList.add('dragover');
-        });
-        uploadArea.addEventListener('dragleave', () => {
-            uploadArea.classList.remove('dragover');
-        });
-        uploadArea.addEventListener('drop', (e) => {
-            e.preventDefault();
-            uploadArea.classList.remove('dragover');
-            filesToUpload = e.dataTransfer.files;
-            if (filesToUpload.length > 0) {
                 showCategoriaModal(() => {
-                    fileInput.files = filesToUpload;
-                    uploadForm.submit();
-                });
-            }
-        });
-        fileInput.addEventListener('change', function(e) {
-            filesToUpload = e.target.files;
-            if (filesToUpload.length > 0) {
-                showCategoriaModal(() => {
-                    uploadForm.submit();
-                });
-            }
-        });
 
-        // Psalm loading functionality
-        document.getElementById('loadPsalm').addEventListener('click', function() {
-            const psalmContent = document.getElementById('psalmContent');
-            const psalmRef = document.getElementById('psalmRef').value;
-            
-            // Show loading state
-            psalmContent.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
-            
-            // Simulate API call
-
-        });
-
+// Eliminado código duplicado y rutas incorrectas. Usar sólo la versión funcional de arriba.
         // Initialize with sample data
         document.addEventListener('DOMContentLoaded', function() {
             // You can add initialization code here
@@ -1278,22 +999,27 @@ const eventForm = document.getElementById('event-form');
 const csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
 function fetchEvents() {
-    fetch('/Test/public/admin/events')
+    fetch('/church/public/admin/events')
         .then(res => res.json())
         .then(events => {
+            // Ordenar eventos por created_at descendente (más reciente arriba)
+            events.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
             eventsList.innerHTML = events.map(event => `
-                <div class="card" style="margin-bottom:1rem;">
-                    <div class="card-header">
-                        <strong>${formatDate(event.date)}</strong> - ${event.name}
-                        <div>
-                            <button class="btn btn-sm btn-primary" onclick="editEvent(${event.id})">Editar</button>
-                            <button class="btn btn-sm btn-danger" onclick="deleteEvent(${event.id})">Borrar</button>
-                        </div>
+                <div class="event-card" style="background:#232323; border-radius:14px; box-shadow:0 2px 12px #FF3B3F22; margin-bottom:1.5rem; padding:1.5rem; color:#fff; display:flex; align-items:center; gap:1.5rem;">
+                    <div class="event-date" style="background:#FF3B3F; color:#fff; border-radius:10px; padding:1rem 1.2rem; text-align:center; min-width:70px;">
+                        <div class="event-day" style="font-size:2rem; font-weight:700;">${formatDate(event.date, 'day')}</div>
+                        <div class="event-month" style="font-size:1.1rem;">${formatDate(event.date, 'month')}</div>
                     </div>
-                    <div class="card-body">
-                        <div>🕒 ${event.time}</div>
-                        <div>📍 ${event.place}</div>
-                        <div>${event.description}</div>
+                    <div class="event-details" style="flex:1;">
+                        <h3 class="event-title" style="color:#FF3B3F; margin-bottom:0.3rem;">${event.name}</h3>
+                        <div class="event-info" style="margin-bottom:0.5rem;">
+                            <span class="event-time" style="margin-right:1.2rem;"><span class="event-icon">🕒</span> ${event.time}</span>
+                            <span class="event-location"><span class="event-icon">📍</span> ${event.place}</span>
+                        </div>
+                        <p class="event-description" style="margin-bottom:0.7rem;">${event.description}</p>
+                        <div style="margin-bottom:0.7rem;"></div>
+                        <button class="btn btn-outline" onclick="editEvent(${event.id})">Editar</button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteEvent(${event.id})">Eliminar</button>
                     </div>
                 </div>
             `).join('');
@@ -1353,17 +1079,16 @@ eventForm.onsubmit = function(e) {
 };
 
 window.editEvent = function(id) {
-    fetch(`/Test/public/admin/events`)
+    fetch(`/church/public/admin/events/${id}`)
         .then(res => res.json())
-        .then(events => {
-            const event = events.find(ev => ev.id === id);
+        .then(event => {
             showEventForm(event);
         });
 };
 
 window.deleteEvent = function(id) {
     if (!confirm('¿Seguro que deseas borrar este evento?')) return;
-    fetch(`/Test/public/admin/events/${id}`, {
+    fetch(`/church/public/admin/events/${id}`, {
         method: 'DELETE',
         headers: { 'X-CSRF-TOKEN': csrf }
     })
@@ -1374,36 +1099,105 @@ window.deleteEvent = function(id) {
 document.addEventListener('DOMContentLoaded', fetchEvents);
 </script>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const navItems = document.querySelectorAll('.admin-nav .nav-item');
-    const sections = document.querySelectorAll('.section');
-
-    navItems.forEach(item => {
-        item.addEventListener('click', function() {
-            // Quitar activo de todos
-            navItems.forEach(i => i.classList.remove('active'));
-            // Poner activo al actual
-            this.classList.add('active');
-            // Ocultar todas las secciones
-            sections.forEach(sec => sec.classList.remove('active'));
-            // Mostrar la sección correspondiente
-            const sectionId = this.getAttribute('data-section');
-            const section = document.getElementById(sectionId);
-            if (section) section.classList.add('active');
-        });
-    });
-});
 </script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const user = JSON.parse(localStorage.getItem('usuario'));
+    // Refrescar usuario desde localStorage (debe ser el usuario actual, no el admin anterior)
+    let user = null;
+    try {
+        user = JSON.parse(localStorage.getItem('usuario'));
+    } catch (e) {
+        user = null;
+    }
     const navItems = document.querySelectorAll('.admin-nav .nav-item');
     const sections = document.querySelectorAll('.section');
-    // Ocultar todas las pestañas y secciones por defecto
-    navItems.forEach(i => i.style.display = 'none');
+    // Ocultar y desactivar todas las pestañas y secciones por defecto
+    navItems.forEach(i => {
+        i.style.display = 'none';
+        i.classList.remove('active');
+    });
     sections.forEach(sec => sec.classList.remove('active'));
-    let allowed = [];
     if (user && user.perfil) {
+        let allowed = [];
+        switch(user.perfil) {
+            case 'Admin':
+                allowed = ['dashboard','gallery','psalms','settings','events','contacto'];
+                break;
+            case 'Salmos':
+                allowed = ['psalms'];
+                break;
+            case 'Gestor':
+                allowed = ['dashboard','settings'];
+                break;
+            case 'Galeria':
+                allowed = ['gallery'];
+                break;
+            case 'Eventos':
+                allowed = ['events'];
+                break;
+            default:
+                allowed = [];
+        }
+        if (user.perfil === 'Admin') {
+            navItems.forEach(i => i.style.display = '');
+            navItems.forEach(i => i.classList.remove('active'));
+            sections.forEach(sec => sec.classList.remove('active'));
+            const nav = document.querySelector('.admin-nav .nav-item[data-section="dashboard"]');
+            const sec = document.getElementById('dashboard');
+            if (nav) nav.classList.add('active');
+            if (sec) sec.classList.add('active');
+            navItems.forEach(item => {
+                item.onclick = function() {
+                    navItems.forEach(i => i.classList.remove('active'));
+                    sections.forEach(sec => sec.classList.remove('active'));
+                    this.classList.add('active');
+                    const sectionId = this.getAttribute('data-section');
+                    const section = document.getElementById(sectionId);
+                    if (section) section.classList.add('active');
+                };
+            });
+        } else {
+            // Mostrar solo las pestañas permitidas para otros perfiles
+            allowed.forEach(sectionId => {
+                const nav = document.querySelector('.admin-nav .nav-item[data-section="' + sectionId + '"]');
+                if (nav) {
+                    nav.style.display = '';
+                    nav.classList.remove('active');
+                }
+            });
+            // Si no hay pestañas permitidas, mostrar mensaje
+            if (allowed.length === 0) {
+                document.querySelector('.admin-content').innerHTML = '<div style="padding:4rem;text-align:center;font-size:1.5rem;color:#b91c1c;">No hay nada aquí</div>';
+            } else {
+                // Activar la primera pestaña permitida
+                navItems.forEach(i => i.classList.remove('active'));
+                sections.forEach(sec => sec.classList.remove('active'));
+                const nav = document.querySelector('.admin-nav .nav-item[data-section="' + allowed[0] + '"]');
+                const sec = document.getElementById(allowed[0]);
+                if (nav) nav.classList.add('active');
+                if (sec) sec.classList.add('active');
+            }
+            // Control de clicks solo en pestañas permitidas
+            navItems.forEach(item => {
+                item.onclick = function() {
+                    const sectionId = this.getAttribute('data-section');
+                    if (allowed.includes(sectionId)) {
+                        navItems.forEach(i => i.classList.remove('active'));
+                        sections.forEach(sec => sec.classList.remove('active'));
+                        this.classList.add('active');
+                        const section = document.getElementById(sectionId);
+                        if (section) section.classList.add('active');
+                    }
+                };
+            });
+        }
+        // Mostrar el correo correcto del usuario arriba
+        const userInfoDiv = document.getElementById('user-info');
+        if (userInfoDiv) {
+            userInfoDiv.textContent = (user && user.email) ? user.email : '';
+        }
+    }
+});
         switch (user.perfil) {
             case 'Admin':
                 allowed = ['dashboard', 'gallery', 'psalms', 'settings', 'events', 'contacto'];

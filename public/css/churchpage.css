@@ -7,11 +7,31 @@
     padding: 0;
 }
 
+
 body {
+    background: url('../../resources/Images/FB.webp') no-repeat center center fixed;
+    background-size: cover;
     font-family: 'Montserrat', Arial, sans-serif;
-    background: #181818;
-    color: #f3f3f3;
+    color: var(--main-text);
     line-height: 1.6;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: var(--main-bg-overlay, rgba(19, 19, 19, 0.35)); /* Puedes cambiar este valor en el root o inline */
+    z-index: 0;
+    pointer-events: none;
+    transition: background 0.3s;
+    backdrop-filter: blur(12px); /* Difuminado, ajusta el valor a tu gusto */
+    -webkit-backdrop-filter: blur(12px); /* Soporte Safari */
+}
+
+main, .container, header, footer, section, .hero {
+    position: relative;
+    z-index: 1;
 }
 
 a {
@@ -34,9 +54,10 @@ a:hover {
 }
 
 /* Header */
+
 header {
-    background: #232323;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    background: var(--main-bg-glass);
+    box-shadow: var(--main-shadow-md);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -48,6 +69,8 @@ header.scrolled {
 }
 
 .header-container {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -93,7 +116,8 @@ nav {
     align-items: center;
     margin: 0 !important;
     padding: 0 !important;
-    background: #232323;
+    background: var(--main-bg-glass);
+    backdrop-filter: blur(2.5px);
 }
 
 .nav-link {
@@ -181,39 +205,17 @@ nav {
     justify-content: center;
 }
 
-.btn {
-    background: #9B131A;
-    color: #fff;
-    padding: 0.7rem 1.5rem;
-    border-radius: 25px;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    transition: background 0.2s;
-    font-size: 1rem;
-    box-shadow: 0 2px 8px rgba(155,19,26,0.08);
-}
 
-.btn-outline {
-    background: transparent;
-    border: 2px solid #fff;
-    color: #fff;
-}
+/* .btn styles are now handled by modern section below */
 
-.btn:hover,
-.btn-outline:hover {
-    background: #fff;
-    color: #232323;
-    border: 2px solid #fff;
-}
 
-.btn:hover,
-.nav-link.btn:hover {
-    background: #fff !important;
-    color: #9B131A !important;
-    border: 2px solid #9B131A !important;
-    box-shadow: 0 2px 8px rgba(155,19,26,0.10);
-}
+/* .btn-outline styles are now handled by modern section below */
+
+
+/* .btn:hover, .btn-outline:hover handled by modern section below */
+
+
+/* .btn:hover, .nav-link.btn:hover handled by modern section below */
 
 /* Scroll Down */
 .scroll-down {
@@ -231,8 +233,14 @@ nav {
 }
 
 /* Secciones */
-section {
+.section {
     padding: 4rem 0 3rem 0;
+    /* No ocultar por defecto, el dashboard controla la visibilidad con .active */
+}
+/* Elimina difuminado en contenedores internos del dashboard */
+.admin-container, .admin-container .card, .admin-container .event-card, .admin-container .gallery-item, .admin-container .contact-form, .admin-container footer {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
 }
 
 .section-title {
@@ -265,13 +273,13 @@ section {
 
 .about-title {
     font-size: 1.3rem;
-    color: #fff;
+    color: var(--main-red-dark);
     margin-bottom: 0.7rem;
 }
 
 .about-description {
     margin-bottom: 1rem;
-    color: #e0e0e0;
+    color: var(--main-text-secondary);
 }
 
 /* Psalm of the Week */
@@ -295,7 +303,7 @@ section {
 
 .psalm-reference {
     font-weight: 700;
-    color: #fff;
+    color: var(--main-red-dark);
     font-size: 1.1rem;
     margin-bottom: 0.5rem;
 }
@@ -303,7 +311,7 @@ section {
 .psalm-quote p {
     font-style: italic;
     margin-bottom: 0.5rem;
-    color: #e0e0e0;
+    color: var(--main-text-secondary);
 }
 
 /* Services */
@@ -315,9 +323,7 @@ section {
 }
 
 .service-card {
-    background: #232323;
     border-radius: 16px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
     overflow: hidden;
     width: 320px;
     display: flex;
@@ -325,6 +331,7 @@ section {
     align-items: center;
     padding-bottom: 1.5rem;
     transition: transform 0.2s;
+    /* Modern glass styles handled below */
 }
 
 .service-card:hover {
@@ -343,7 +350,7 @@ section {
 }
 
 .service-title {
-    color: #fff;
+    color: var(--main-red-dark);
     font-size: 1.2rem;
     margin-bottom: 0.5rem;
     font-weight: 600;
@@ -351,7 +358,7 @@ section {
 
 .service-description {
     margin-bottom: 1rem;
-    color: #e0e0e0;
+    color: var(--main-text-secondary);
 }
 
 /* Events */
@@ -363,15 +370,16 @@ section {
 }
 
 .event-card {
-    background: #232323;
     border-radius: 14px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
     display: flex;
     gap: 1.2rem;
     padding: 1.2rem;
     align-items: center;
     width: 370px;
     transition: transform 0.2s;
+    background: var(--main-bg-glass) !important;
+    box-shadow: var(--main-shadow-md) !important;
+    backdrop-filter: blur(2.5px);
 }
 
 .event-card:hover {
@@ -402,7 +410,7 @@ section {
 }
 
 .event-title {
-    color: #fff;
+    color: var(--main-red-dark);
     font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 0.3rem;
@@ -410,7 +418,7 @@ section {
 
 .event-info {
     font-size: 0.95rem;
-    color: #e0e0e0;
+    color: var(--main-text-secondary);
     margin-bottom: 0.5rem;
     display: flex;
     gap: 1.2rem;
@@ -418,6 +426,14 @@ section {
 
 .event-description {
     margin-bottom: 0.7rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    word-break: break-word;
+    white-space: normal;
 }
 
 /* Gallery */
@@ -431,9 +447,11 @@ section {
     position: relative;
     overflow: hidden;
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(155,19,26,0.08);
+    box-shadow: var(--main-shadow-sm);
     cursor: pointer;
     transition: transform 0.2s;
+    background: var(--main-bg-glass);
+    backdrop-filter: blur(2.5px);
 }
 
 .gallery-item:hover {
@@ -463,7 +481,7 @@ section {
 }
 
 .gallery-icon {
-    color: #fff;
+    color: var(--main-red-dark);
     font-size: 2.5rem;
     font-weight: 700;
 }
@@ -471,7 +489,7 @@ section {
 /* Live Stream */
 .live-stream iframe {
     border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(155,19,26,0.10);
+    box-shadow: var(--main-shadow-md);
 }
 
 /* Contact */
@@ -540,11 +558,12 @@ section {
 .contact-form {
     flex: 1 1 320px;
     min-width: 320px;
-    background: #232323;
-    color: #fff;
+    background: var(--main-bg-glass);
+    color: var(--main-text);
     border-radius: 14px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+    box-shadow: var(--main-shadow-md);
     padding: 2rem 1.5rem;
+    backdrop-filter: blur(2.5px);
 }
 
 .form-group {
@@ -561,12 +580,15 @@ section {
 .form-control {
     width: 100%;
     padding: 0.7rem;
-    border: 1.5px solid #444;
+    border: 1.5px solid var(--main-border);
     border-radius: 8px;
     font-size: 1rem;
-    background: #232323;
-    color: #fff;
+    background: var(--main-bg-glass);
+    color: var(--main-text);
     transition: border 0.2s;
+    caret-color: var(--main-red); /* cursor visible */
+    /* Mejor contraste para texto ingresado */
+    text-shadow: 0 1px 2px rgba(0,0,0,0.18);
 }
 
 .form-control:focus {
@@ -576,9 +598,10 @@ section {
 
 /* Footer */
 footer {
-    background: #181818;
-    color: #fff;
+    background: var(--main-bg-glass);
+    color: var(--main-text);
     padding: 2.5rem 0 1rem 0;
+    backdrop-filter: blur(2.5px);
 }
 
 .footer-content {
@@ -607,20 +630,20 @@ footer {
     font-family: 'Lora', serif;
     font-size: 1.2rem;
     font-weight: 700;
-    color: #fff;
+    color: var(--main-red-dark);
 }
 
 .footer-description {
     font-size: 0.98rem;
     margin-bottom: 1rem;
-    color: #fff;
+    color: var(--main-text-secondary);
 }
 
 .footer-title {
     font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 0.7rem;
-    color: #fff;
+    color: var(--main-red-dark);
 }
 
 .footer-links {
@@ -633,128 +656,155 @@ footer {
 }
 
 .footer-link a {
-    color: #fff;
+    color: var(--main-red-dark);
     font-size: 0.98rem;
     transition: color 0.2s;
 }
 
 .footer-link a:hover {
-    color: #9B131A;
+    color: var(--main-red);
 }
 
 .footer-bottom {
     text-align: center;
     margin-top: 2rem;
     font-size: 0.95rem;
-    color: #9B131A;
+    color: var(--main-red);
 }
 
-/* Cambia el rojo oscuro a un rojo más vivo */
+
+/* Paleta moderna y cristalina */
 :root {
-    --main-red: #FF3B3F;
-    --main-red-dark: #C62828;
+    --main-red: #ef485b; /* Rojo vivo */
+    --main-red-dark: #e63247; /* Rojo oscuro */
+    --main-red-glass: rgba(206, 26, 47, 0.18); /* Cristalino, más vivo */
+    --main-bg-glass: rgba(19, 19, 19, 0.005); /* Fondo glass sutil */
+    --main-bg-overlay: rgba(19, 19, 19, 0.796); /* Overlay encima de la imagen, edita la opacidad aquí */
+    --main-text: #fff;
+    --main-text-secondary: #ff8b8b;
+    --main-border: rgba(255, 0, 13, 0.38);
+    --main-shadow-sm: 0 2px 16px rgba(255, 0, 30, 0.13);
+    --main-shadow-md: 0 4px 24px rgba(255,59,83,0.18);
+    --main-shadow-lg: 0 8px 32px rgba(255,59,83,0.22);
+    --main-shadow-xl: 0 12px 48px rgba(255,59,83,0.25);
+    --main-gradient: linear-gradient(135deg, rgba(128, 23, 31, 0.92) 0%, rgba(255,179,179,0.18) 100%);
 }
 
-.logo-text,
-.section-title,
-.psalm-reference,
-.service-title,
-.event-title,
-.contact-title,
-.footer-title,
-.footer-logo-text {
-    color: var(--main-red) !important;
+
+.logo-text {
+    color: var(--main-red-dark) !important;
+    text-shadow: 0 2px 12px var(--main-red-glass), 0 1px 0 #fff8;
+    letter-spacing: 0.5px;
 }
 
-.nav-link,
-.nav-link.btn-outline {
-    color: var(--main-red) !important;
-    border-color: var(--main-red) !important;
+
+/* --- ESTILOS MODERNOS Y CRISTALINOS --- */
+.nav-link {
+    color: var(--main-red-dark) !important;
+    border-color: var(--main-red-dark) !important;
+    background: var(--main-bg-glass) !important;
+    backdrop-filter: blur(2.5px);
+    font-weight: 700;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
 }
 
-.nav-link.btn,
-.btn,
-.btn-outline {
+.nav-link.btn {
     background: var(--main-red) !important;
     color: #fff !important;
-    border-color: var(--main-red) !important;
+    border-color: var(--main-red-dark) !important;
+    font-weight: 700;
+    box-shadow: 0 2px 16px var(--main-red-glass), 0 1.5px 8px rgba(255,255,255,0.08);
+    backdrop-filter: blur(2.5px);
+}
+
+.btn,
+.btn-outline {
+    border-radius: 24px;
+    font-weight: 700;
+    font-size: 1.01rem;
+    padding: 0.62rem 1.32rem;
+    box-shadow: 0 2px 16px var(--main-red-glass), 0 1.5px 8px rgba(255,255,255,0.08);
+    backdrop-filter: blur(2.5px);
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.btn {
+    background: var(--main-red-dark) !important;
+    color: #fff !important;
+    border: 2px solid var(--main-red-dark) !important;
 }
 
 .btn-outline {
-    background: transparent !important;
-    color: var(--main-red) !important;
+    background: var(--main-bg-glass) !important;
+    color: var(--main-red-dark) !important;
+    border: 2px solid var(--main-red-dark) !important;
 }
 
 .btn:hover,
-.btn-outline:hover,
-.nav-link.btn:hover,
-.nav-link.btn-outline:hover {
-    background: #181818 !important; /* Fondo igual al body */
-    color: var(--main-red) !important;
-    border: 2px solid var(--main-red-dark) !important;
-}
-
-.social-link,
-.footer-link a {
+.btn-outline:hover {
     background: var(--main-red) !important;
-    color: #fff !important;
+    color: var(--main-text-secondary) !important;
+    border: 2px solid var(--main-red-dark) !important;
+    box-shadow: 0 4px 24px var(--main-red-glass);
 }
 
-.social-link:hover,
-.footer-link a:hover {
+.social-link {
+    background: var(--main-red-dark) !important;
+    color: #fff !important;
+    box-shadow: 0 2px 8px var(--main-red-glass);
+    font-weight: 700;
+    backdrop-filter: blur(2.5px);
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.social-link:hover {
     background: #fff !important;
     color: var(--main-red-dark) !important;
+    box-shadow: 0 4px 16px var(--main-red-glass);
 }
 
 .event-date {
-    background: var(--main-red) !important;
+    background: var(--main-red-dark) !important;
     color: #fff !important;
+    box-shadow: 0 2px 8px var(--main-red-glass);
+    font-weight: 700;
+    backdrop-filter: blur(2.5px);
 }
 
 .form-label {
-    color: var(--main-red) !important;
+    color: var(--main-red-dark) !important;
+    font-weight: 700;
 }
 
 .form-control:focus {
-    border-color: var(--main-red) !important;
+    border-color: var(--main-red-dark) !important;
+    background: #18181a;
+    color: #fff;
+    font-weight: 700;
+    outline: none;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.22);
 }
 
-/* Ajusta el color de sombra para el nuevo rojo */
-.service-card,
-.event-card,
-.contact-form,
-.gallery-item {
-    box-shadow: 0 2px 12px rgba(255,59,63,0.18) !important;
+
+.service-card {
+    box-shadow: 0 2px 16px var(--main-red-glass) !important;
+    background: var(--main-bg-glass) !important;
+    backdrop-filter: blur(2.5px);
 }
 
-/* Solución 1: Hover del botón Register (btn-outline) */
-.nav-link.btn-outline,
-.btn-outline {
-    background: transparent !important;
-    border: 2px solid var(--main-red) !important;
-    color: var(--main-red) !important;
-    transition: background 0.2s, color 0.2s;
-}
 
-.nav-link.btn-outline:hover,
-.btn-outline:hover {
-    background: var(--main-red) !important;
-    color: #fff !important;
-    border: 2px solid var(--main-red-dark) !important;
-}
-
-/* Solución 2: El hover del logo no debe afectar los botones */
+/* --- HOVERS Y EFECTOS DE LOGO --- */
 .logo:hover ~ nav .nav-link.btn-outline,
 .logo:focus ~ nav .nav-link.btn-outline {
     background: transparent !important;
-    color: var(--main-red) !important;
-    border: 2px solid var(--main-red) !important;
+    color: var(--main-red-dark) !important;
+    border: 2px solid var(--main-red-dark) !important;
 }
 
 .logo:hover ~ nav .nav-link.btn-outline:hover,
 .logo:focus ~ nav .nav-link.btn-outline:hover {
     background: var(--main-red) !important;
-    color: #fff !important;
+    color: var(--main-text-secondary) !important;
     border: 2px solid var(--main-red-dark) !important;
 }
 
@@ -837,8 +887,5 @@ footer {
     border: 1.5px solid #720E29 !important;
 }
 
-.nav-link.btn-outline:hover {
-    background: #720E29;
-    color: #fff !important;
-    border: 1.5px solid #720E29;
-}
+
+/* Elimina hover antiguo, ya cubierto arriba */

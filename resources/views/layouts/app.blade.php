@@ -11,11 +11,11 @@
 <body>
   {{-- Navbar o header común --}}
   <!-- Header personalizado -->
-  <header style="background:#232323; box-shadow:0 2px 8px rgba(0,0,0,0.25); padding:1.2rem 0;">
-    <div class="container header-container" style="display:flex; align-items:center; justify-content:space-between;">
+  <header style="background:rgba(35,35,35,0.7); box-shadow:0 2px 8px rgba(0,0,0,0.25); padding:0.5rem 0; min-height:48px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);">
+    <div class="container header-container" style="display:flex; align-items:center; justify-content:space-between; min-height:48px;">
       <div class="logo" style="display:flex; align-items:center; text-decoration:none;">
-        <img src="{{ asset('Images/logo.webp') }}" alt="Casa de Adoración Logo" style="height:48px; margin-right:1rem;">
-        <span class="logo-text" style="font-family:'Montserrat',sans-serif; font-size:2rem; color:#fff; font-weight:700;">Casa de Adoración NJ</span>
+        <img src="{{ asset('Images/logo.webp') }}" alt="Casa de Adoración Logo" style="height:36px; margin-right:0.7rem;">
+        <span class="logo-text" style="font-family:'Montserrat',sans-serif; font-size:1.3rem; color:#fff; font-weight:700;">Casa de Adoración NJ</span>
       </div>
     </div>
   </header>

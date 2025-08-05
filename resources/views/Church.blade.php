@@ -32,20 +32,20 @@
     <li class="nav-item"><a href="#contacto" class="nav-link">Contacto</a></li>
     @guest
         <li class="nav-item">
-            <a href="{{ route('login.form') }}" class="nav-link btn" style="background:#720E29; color:#fff; margin-right: 0.5rem;">Iniciar sesion</a>
+            <a href="{{ route('login.form') }}" class="nav-link btn" style="background:var(--main-red-dark); color:var(--main-text); margin-right: 0.5rem; border:2px solid var(--main-red-dark); box-shadow:var(--main-shadow-sm); transition:background 0.2s, color 0.2s, box-shadow 0.2s;">Iniciar sesión</a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('register.form') }}" class="nav-link btn btn-outline" style="border:1px solid #720E29; color:#720E29;">Registrarse</a>
+            <a href="{{ route('register.form') }}" class="nav-link btn btn-outline" style="background:transparent; color:var(--main-red-dark); border:2px solid var(--main-red-dark); box-shadow:var(--main-shadow-sm); transition:background 0.2s, color 0.2s, box-shadow 0.2s;">Registrarse</a>
         </li>
 @else
     <li class="nav-item">
         <form method="POST" action="{{ route('logout') }}" style="display:inline;">
             @csrf
-            <button type="submit" class="nav-link btn btn-outline" style="border:1px solid #720E29; color:#720E29; background:transparent;">Cerrar sesión</button>
+            <button type="submit" class="nav-link btn btn-outline" style="border:2px solid var(--main-red-dark); color:var(--main-red-dark); background:transparent; box-shadow:var(--main-shadow-sm); transition:background 0.2s, color 0.2s, box-shadow 0.2s;">Cerrar sesión</button>
         </form>
     </li>
     <li class="nav-item" id="admin-btn" style="display:none;">
-        <a href="/church/public/admin" class="nav-link btn" style="background:#720E29; color:#FFFF;">Panel Admin</a>
+        <a href="/church/public/admin" class="nav-link btn" style="background:var(--main-red-dark); color:var(--main-text); box-shadow:var(--main-shadow-sm);">Panel Admin</a>
     </li>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -83,8 +83,8 @@
             <h1 class="hero-title">Bienvenidos a Casa de Adoración NJ</h1>
             <p class="hero-subtitle">Un lugar donde encontrarás fe, comunidad y esperanza para tu vida</p>
             <div class="hero-buttons">
-                <a href="#servicios" class="btn">Nuestros Servicios</a>
-                <a href="#contacto" class="btn btn-outline">Contáctanos</a>
+                <a href="#servicios" class="btn" style="background:var(--main-red); color:var(--main-text); border:2px solid var(--main-red); box-shadow:var(--main-shadow-sm);">Nuestros Servicios</a>
+                <a href="#contacto" class="btn btn-outline contactanos-btn" style="background:transparent; color:var(--main-red-dark); border:2px solid var(--main-red-dark); box-shadow:var(--main-shadow-sm); transition:background 0.2s, color 0.2s, box-shadow 0.2s;">Contáctanos</a>
             </div>
         </div>
         <div class="scroll-down">
@@ -121,9 +121,11 @@
                     <img id="psalm-week-img" src="../resources/Images/Image1.png" alt="Salmo de la Semana" style="border-radius:16px;">
                 </div>
                 <div class="psalm-text">
-                    <h3 class="psalm-reference" style="color:#fff;"></h3>
-                    <div class="psalm-quote" style="color:#fff;"></div>
-                    <p class="psalm-reflection" style="color:#FF3B3F; font-style:italic;">Este salmo nos recuerda que Dios es nuestro proveedor y protector. Cuando confiamos en Él como nuestro pastor, encontramos paz y renovación para nuestras almas. Esta semana, reflexionemos sobre cómo Dios nos guía y nos da descanso en medio de nuestras ocupadas vidas.</p>
+                    <h3 class="psalm-reference" style="color:var(--main-text);"></h3>
+                    <div class="psalm-quote" style="color:var(--main-text-secondary);"></div>
+                    <h1 class="section-title" style="font-weight:600;margin-top:1.2rem;margin-bottom:0.3rem;">Reflexión</h1>
+                    <p class="psalm-reflection" style="color:var(--main-red); font-style:italic;">Este salmo nos recuerda que Dios es nuestro proveedor y protector. Cuando confiamos en Él como nuestro pastor, encontramos paz y renovación para nuestras almas. Esta semana, reflexionemos sobre cómo Dios nos guía y nos da descanso en medio de nuestras ocupadas vidas.</p>
+                <p class="psalm-reflection" style="color:var(--main-red); font-style:italic;">Este salmo nos recuerda que Dios es nuestro proveedor y protector. Cuando confiamos en Él como nuestro pastor, encontramos paz y renovación para nuestras almas. Esta semana, reflexionemos sobre cómo Dios nos guía y nos da descanso en medio de nuestras ocupadas vidas.</p>
                 </div>
             </div>
         </div>
@@ -138,7 +140,10 @@
                     // Texto del salmo
                     document.querySelector('.psalm-quote').textContent = salmo.verses;
                 }
+                
+                
                 // Reflexión personalizada (si existe en localStorage)
+                
                 const reflexion = localStorage.getItem('reflexionSalmoSemana');
                 if (reflexion) {
                     document.querySelector('.psalm-reflection').textContent = reflexion;
@@ -202,31 +207,51 @@
             <h2 class="section-title">Noticias</h2>
             <div class="events-container">
                 @php
-                    $eventos = \App\Models\Event::orderBy('date', 'asc')->whereDate('date', '>=', now())->get();
+                    $eventos = \App\Models\Event::orderBy('date', 'desc')->whereDate('date', '>=', now())->get();
                 @endphp
+                <style>
+                .events-container {
+                  display: grid;
+                  grid-template-columns: repeat(3, 1fr);
+                  gap: 1.5rem;
+                  align-items: start;
+                }
+                @media (max-width: 1200px) {
+                  .events-container {
+                    grid-template-columns: repeat(2, 1fr) !important;
+                  }
+                }
+                @media (max-width: 700px) {
+                  .events-container {
+                    grid-template-columns: 1fr !important;
+                  }
+                }
+                </style>
+                <div class="events-inner" style="display:contents;">
                 @forelse($eventos as $event)
-                    <div class="event-card" style="background:#232323; border-radius:14px; box-shadow:0 2px 12px #FF3B3F22; margin-bottom:1.5rem; padding:1.5rem; color:#fff; display:flex; align-items:center; gap:1.5rem;">
-                        <div class="event-date" style="background:#FF3B3F; color:#fff; border-radius:10px; padding:1rem 1.2rem; text-align:center; min-width:70px;">
+                    <div class="event-card" style="background:#232323; border-radius:14px; box-shadow:0 2px 12px #FF3B3F22; padding:1.5rem; color:#fff; display:flex; align-items:center; gap:1.5rem; flex-direction:row; justify-self:center;">
+                        <div class="event-date" style="background:var(--main-red); color:var(--main-text); border-radius:10px; padding:1rem 1.2rem; text-align:center; min-width:70px; box-shadow:var(--main-shadow-sm);">
                             <div class="event-day" style="font-size:2rem; font-weight:700;">{{ \Carbon\Carbon::parse($event->date)->format('d') }}</div>
                             <div class="event-month" style="font-size:1.1rem;">{{ \Carbon\Carbon::parse($event->date)->translatedFormat('M') }}</div>
                         </div>
                         <div class="event-details" style="flex:1;">
-                            <h3 class="event-title" style="color:#FF3B3F; margin-bottom:0.3rem;">{{ $event->name }}</h3>
+                            <h3 class="event-title" style="color:var(--main-red); margin-bottom:0.3rem; text-shadow:0 2px 8px var(--main-red-glass);">{{ $event->name }}</h3>
                             <div class="event-info" style="margin-bottom:0.5rem;">
                                 <span class="event-time" style="margin-right:1.2rem;"><span class="event-icon">🕒</span> {{ $event->time }}</span>
                                 <span class="event-location"><span class="event-icon">📍</span> {{ $event->place }}</span>
                             </div>
                             <p class="event-description" style="margin-bottom:0.7rem;">{{ \Illuminate\Support\Str::limit($event->description, 80) }}</p>
-                            <a href="{{ route('event.detail', $event->id) }}" class="btn" style="background:#FF3B3F; color:#fff; margin-right:0.7rem;">Ver detalles</a>
-                            {{-- DEBUG: Mostrar valor del campo --}}
-                            {{-- <span style="color:yellow;">Valor: {{ var_export($event->show_register_button, true) }}</span> --}}
-                            {{-- Aviso de inscripción presencial eliminado por solicitud --}}
+                            <a href="{{ route('event.detail', $event->id) }}" class="btn" style="background:var(--main-red); color:var(--main-text); margin-right:0.7rem; border:2px solid var(--main-red); box-shadow:var(--main-shadow-sm);">Ver detalles</a>
                         </div>
                     </div>
                 @empty
                     <p>No hay eventos programados.</p>
                 @endforelse
             </div>
+</style>
+<style>
+/* Eliminado: ahora el CSS está embebido arriba para mejor control de la grilla */
+</style>
         </div>
     </section>
     
@@ -235,7 +260,7 @@
         <div class="container">
             <h2 class="section-title">Nuestra Galería</h2>
             <div style="text-align:right; margin-bottom:1rem;">
-                <a href="{{ route('galerias.categorias') }}" class="btn" style="background:#395B64; color:#fff; padding:0.5rem 1.2rem; border-radius:6px;">Ver por categorías</a>
+                <a href="{{ route('galerias.categorias') }}" class="btn" style="background:var(--main-red-dark); color:var(--main-text); padding:0.5rem 1.2rem; border-radius:6px; border:2px solid var(--main-red-dark); box-shadow:var(--main-shadow-sm);">Ver por categorías</a>
             </div>
             <div class="gallery-grid">
                 @forelse($images as $image)
@@ -244,7 +269,7 @@
                             <img src="{{ asset('uploads/' . $image->filename) }}" alt="Imagen de galería" style="border-radius:16px;">
                         </a>
                         <div style="font-size:0.95rem; color:#395B64; margin-top:0.3rem; text-align:center;">
-                            {{ ucfirst($image->categoria ?? 'Sin categoría') }}
+                            <span style="color:var(--main-red-dark);">{{ ucfirst($image->categoria ?? 'Sin categoría') }}</span>
                         </div>
                         <div class="gallery-overlay">
                             <div class="gallery-icon">+</div>
@@ -271,7 +296,7 @@
             </div>
             <p style="text-align:center; margin-top:1rem; color:#395B64;">
                 Si no hay transmisión en vivo, verás el último video publicado.<br>
-                <a href="https://www.facebook.com/CasaDeAdoracionNJ/live" target="_blank" class="btn">Ver en Facebook</a>
+                <a href="https://www.facebook.com/CasaDeAdoracionNJ/live" target="_blank" class="btn" style="background:var(--main-red); color:var(--main-text); border:2px solid var(--main-red); box-shadow:var(--main-shadow-sm);">Ver en Facebook</a>
             </p>
         </div>
     </section>
@@ -378,40 +403,18 @@
 
 
 </body>
+
+<!-- footer -->
 </html>
-
-</script>
-</body>
-
-<!-- Mapa interactivo Leaflet al final de la página principal -->
-
-</section>
-<!-- Leaflet CSS -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-<!-- Leaflet JS -->
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script>
-    // Coordenadas exactas: 21.032965, -89.624553
-    document.addEventListener('DOMContentLoaded', function() {
-        var map = L.map('map').setView([21.032965, -89.624553], 18);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
-        }).addTo(map);
-        var marker = L.marker([21.032965, -89.624553])
-            .addTo(map)
-            .bindPopup('Iglesia Nueva Jerusalén<br>(Misión) Asambleas de Dios')
-            .openPopup();
-        // Redirigir a Google Maps al hacer clic en el mapa o el marcador
-        var googleMapsUrl = 'https://www.google.com/maps/place/Iglesia+Nueva+Jerusal%C3%A9n+(Misi%C3%B3n)+Asambleas+de+Dios/@21.032965,-89.624553,18z/data=!4m6!3m5!1s0x8f56769d4ff8bdbf:0xb81b05c4ce563d15!8m2!3d21.032965!4d-89.6245534!16s%2Fg%2F11g6983ms_?hl=es-419&entry=ttu&g_ep=EgoyMDI1MDcwOC4wIKXMDSoASAFQAw%3D%3D';
-        map.on('click', function() {
-            window.open(googleMapsUrl, '_blank');
-        });
-        marker.on('click', function() {
-            window.open(googleMapsUrl, '_blank');
-        });
-    });
-</script>
-</body>
+<style>
+.contactanos-btn:hover, .contactanos-btn:focus {
+    background: transparent !important;
+    color: var(--main-red) !important;
+    border: 2px solid var(--main-red) !important;
+    box-shadow: var(--main-shadow-md) !important;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+</style>
 </html>
 
 

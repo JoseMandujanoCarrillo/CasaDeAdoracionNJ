@@ -80,7 +80,11 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <script>
+    // Redirigir automáticamente a dashboard.blade.php (ruta del dashboard)
+    window.location.href = '/church/public/admin/dashboard';
+    </script>
+    <div class="container" style="display:none;">
         <h1>Editar Galería de Imágenes</h1>
 
         <!-- Mensajes de éxito o error -->
