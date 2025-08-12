@@ -254,11 +254,10 @@ nav {
 .section-title {
     font-family: 'Lora', serif;
     font-size: 2rem;
-    color: #fff;
+    color: #DC2640;
     margin-bottom: 2rem;
     text-align: center;
     font-weight: 700;
-    text-shadow: 0 2px 12px var(--main-red-glass), 0 1px 0 #fff8;
 }
 
 /* About */
@@ -684,11 +683,11 @@ footer {
     --main-red: #DC2640; /* Botones */
     --main-red-dark: #DC2640; /* Rojo oscuro */
     --main-red-glass: rgba(226, 50, 71, 0.18); /* Cristalino, más vivo (botones) */
-    --main-red-text: #f1605b; /* Home: barra de navegación, logo, botones */
+    --main-red-text: #f05c5c; /* Home: barra de navegación, logo, botones */
     --main-red-dark-text: #e4455d; /* Rojo moderno oscuro para textos */
     --main-bg-glass: rgba(19, 19, 19, 0.005); /* Fondo glass sutil */
     --main-bg-overlay: rgba(19, 19, 19, 0.796); /* Overlay encima de la imagen, edita la opacidad aquí */
-    --main-text: #5eb6d7; /* Rosa muy claro para textos principales */
+    --main-text: #ffffff; /* Rosa muy claro para textos principales */
     --main-text-secondary: #5eb6d7; /* Azul oscuro para textos secundarios */
     --main-accent: #e3e4e4; /* Azul claro/acento */
     --main-border: rgba(226, 50, 71, 0.38); /* Borde con el nuevo rojo */
