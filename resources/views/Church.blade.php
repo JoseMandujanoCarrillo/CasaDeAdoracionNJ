@@ -32,20 +32,20 @@
     <li class="nav-item"><a href="#contacto" class="nav-link">Contacto</a></li>
     @guest
         <li class="nav-item">
-            <a href="{{ route('login.form') }}" class="nav-link btn" style="background:var(--main-red-dark); color:var(--main-text); margin-right: 0.5rem; border:2px solid var(--main-red-dark); box-shadow:var(--main-shadow-sm); transition:background 0.2s, color 0.2s, box-shadow 0.2s;">Iniciar sesión</a>
+            <a href="{{ route('login.form') }}" class="nav-link btn text-white" style="color:#fff !important;">Iniciar sesión</a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('register.form') }}" class="nav-link btn btn-outline" style="background:transparent; color:var(--main-red-dark); border:2px solid var(--main-red-dark); box-shadow:var(--main-shadow-sm); transition:background 0.2s, color 0.2s, box-shadow 0.2s;">Registrarse</a>
+            <a href="{{ route('register.form') }}" class="btn btn-outline">Registrarse</a>
         </li>
 @else
     <li class="nav-item">
         <form method="POST" action="{{ route('logout') }}" style="display:inline;">
             @csrf
-            <button type="submit" class="nav-link btn btn-outline" style="border:2px solid var(--main-red-dark); color:var(--main-red-dark); background:transparent; box-shadow:var(--main-shadow-sm); transition:background 0.2s, color 0.2s, box-shadow 0.2s;">Cerrar sesión</button>
+            <button type="submit" class="nav-link btn btn-outline">Cerrar sesión</button>
         </form>
     </li>
     <li class="nav-item" id="admin-btn" style="display:none;">
-        <a href="/church/public/admin" class="nav-link btn" style="background:var(--main-red-dark); color:var(--main-text); box-shadow:var(--main-shadow-sm);">Panel Admin</a>
+        <a href="/church/public/admin" class="btn">Panel Admin</a>
     </li>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -83,8 +83,8 @@
             <h1 class="hero-title">Bienvenidos a Casa de Adoración NJ</h1>
             <p class="hero-subtitle">Un lugar donde encontrarás fe, comunidad y esperanza para tu vida</p>
             <div class="hero-buttons">
-                <a href="#servicios" class="btn" style="background:var(--main-red); color:var(--main-text); border:2px solid var(--main-red); box-shadow:var(--main-shadow-sm);">Nuestros Servicios</a>
-                <a href="#contacto" class="btn btn-outline contactanos-btn" style="background:transparent; color:var(--main-red-dark); border:2px solid var(--main-red-dark); box-shadow:var(--main-shadow-sm); transition:background 0.2s, color 0.2s, box-shadow 0.2s;">Contáctanos</a>
+                <a href="#servicios" class="btn">Nuestros Servicios</a>
+                <a href="#contacto" class="btn btn-outline contactanos-btn">Contáctanos</a>
             </div>
         </div>
         <div class="scroll-down">
@@ -95,7 +95,7 @@
     </section>
     
     <!-- Nosotros -->
-    <section class="about" id="nosotros">
+    <section class="about" id="nosotros" style="margin-top:4rem;">
         <div class="container">
             <h2 class="section-title">Quiénes Somos</h2>
             <div class="about-content">
@@ -113,7 +113,7 @@
     </section>
     
     <!-- Salmo de la Semana -->
-    <section class="psalm-of-week" id="salmo">
+    <section class="psalm-of-week" id="salmo" style="margin-top:2.5rem;">
         <div class="container">
             <h1 class="section-title">Salmo de la Semana</h1>
             <div class="psalm-content">
@@ -121,11 +121,10 @@
                     <img id="psalm-week-img" src="../resources/Images/Image1.png" alt="Salmo de la Semana" style="border-radius:16px;">
                 </div>
                 <div class="psalm-text">
-                    <h3 class="psalm-reference" style="color:var(--main-text);"></h3>
-                    <div class="psalm-quote" style="color:var(--main-text-secondary);"></div>
+                    <h3 class="psalm-reference"></h3>
+                    <div class="psalm-quote"></div>
                     <h1 class="section-title" style="font-weight:600;margin-top:1.2rem;margin-bottom:0.3rem;">Reflexión</h1>
-                    <p class="psalm-reflection" style="color:var(--main-red); font-style:italic;">Este salmo nos recuerda que Dios es nuestro proveedor y protector. Cuando confiamos en Él como nuestro pastor, encontramos paz y renovación para nuestras almas. Esta semana, reflexionemos sobre cómo Dios nos guía y nos da descanso en medio de nuestras ocupadas vidas.</p>
-                <p class="psalm-reflection" style="color:var(--main-red); font-style:italic;">Este salmo nos recuerda que Dios es nuestro proveedor y protector. Cuando confiamos en Él como nuestro pastor, encontramos paz y renovación para nuestras almas. Esta semana, reflexionemos sobre cómo Dios nos guía y nos da descanso en medio de nuestras ocupadas vidas.</p>
+                    <p class="psalm-reflection">Este salmo nos recuerda que Dios es nuestro proveedor y protector. Cuando confiamos en Él como nuestro pastor, encontramos paz y renovación para nuestras almas. Esta semana, reflexionemos sobre cómo Dios nos guía y nos da descanso en medio de nuestras ocupadas vidas.</p>
                 </div>
             </div>
         </div>
@@ -161,7 +160,7 @@
     </section>
     
     <!-- Servicios -->
-    <section class="services" id="servicios">
+    <section class="services" id="servicios" style="margin-top:4rem;">
         <div class="container">
             <h2 class="section-title">Nuestros Servicios</h2>
             <div class="services-grid">
@@ -202,7 +201,7 @@
     </section>
     
     <!-- Eventos -->
-    <section class="events" id="eventos">
+    <section class="events" id="eventos" style="margin-top:3rem;">
         <div class="container">
             <h2 class="section-title">Noticias</h2>
             <div class="events-container">
@@ -230,18 +229,18 @@
                 <div class="events-inner" style="display:contents;">
                 @forelse($eventos as $event)
                     <div class="event-card" style="background:#232323; border-radius:14px; box-shadow:0 2px 12px #FF3B3F22; padding:1.5rem; color:#fff; display:flex; align-items:center; gap:1.5rem; flex-direction:row; justify-self:center;">
-                        <div class="event-date" style="background:var(--main-red); color:var(--main-text); border-radius:10px; padding:1rem 1.2rem; text-align:center; min-width:70px; box-shadow:var(--main-shadow-sm);">
-                            <div class="event-day" style="font-size:2rem; font-weight:700;">{{ \Carbon\Carbon::parse($event->date)->format('d') }}</div>
-                            <div class="event-month" style="font-size:1.1rem;">{{ \Carbon\Carbon::parse($event->date)->translatedFormat('M') }}</div>
+                        <div class="event-date">
+                            <div class="event-day">{{ \Carbon\Carbon::parse($event->date)->format('d') }}</div>
+                            <div class="event-month">{{ \Carbon\Carbon::parse($event->date)->translatedFormat('M') }}</div>
                         </div>
-                        <div class="event-details" style="flex:1;">
-                            <h3 class="event-title" style="color:var(--main-red); margin-bottom:0.3rem; text-shadow:0 2px 8px var(--main-red-glass);">{{ $event->name }}</h3>
-                            <div class="event-info" style="margin-bottom:0.5rem;">
-                                <span class="event-time" style="margin-right:1.2rem;"><span class="event-icon">🕒</span> {{ $event->time }}</span>
+                        <div class="event-details">
+                            <h3 class="event-title">{{ $event->name }}</h3>
+                            <div class="event-info">
+                                <span class="event-time"><span class="event-icon">🕒</span> {{ $event->time }}</span>
                                 <span class="event-location"><span class="event-icon">📍</span> {{ $event->place }}</span>
                             </div>
-                            <p class="event-description" style="margin-bottom:0.7rem;">{{ \Illuminate\Support\Str::limit($event->description, 80) }}</p>
-                            <a href="{{ route('event.detail', $event->id) }}" class="btn" style="background:var(--main-red); color:var(--main-text); margin-right:0.7rem; border:2px solid var(--main-red); box-shadow:var(--main-shadow-sm);">Ver detalles</a>
+                            <p class="event-description">{{ \Illuminate\Support\Str::limit($event->description, 80) }}</p>
+                            <a href="{{ route('event.detail', $event->id) }}" class="btn">Ver detalles</a>
                         </div>
                     </div>
                 @empty
@@ -256,11 +255,11 @@
     </section>
     
     <!-- Galería -->
-    <section class="gallery" id="galeria">
+    <section class="gallery" id="galeria" style="margin-top:3rem;">
         <div class="container">
             <h2 class="section-title">Nuestra Galería</h2>
             <div style="text-align:right; margin-bottom:1rem;">
-                <a href="{{ route('galerias.categorias') }}" class="btn" style="background:var(--main-red-dark); color:var(--main-text); padding:0.5rem 1.2rem; border-radius:6px; border:2px solid var(--main-red-dark); box-shadow:var(--main-shadow-sm);">Ver por categorías</a>
+                <a href="{{ route('galerias.categorias') }}" class="btn">Ver por categorías</a>
             </div>
             <div class="gallery-grid">
                 @forelse($images as $image)
@@ -283,7 +282,7 @@
     </section>
 
     <!-- Transmisión en Vivo -->
-    <section class="live-stream" id="transmision">
+    <section class="live-stream" id="transmision" style="margin-top:3rem;">
         <div class="container">
             <h2 class="section-title">Transmisión en Vivo</h2>
             <div class="fb-video-container" style="display: flex; justify-content: center;">
@@ -294,15 +293,17 @@
                     allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
                 </iframe>
             </div>
-            <p style="text-align:center; margin-top:1rem; color:#395B64;">
+            <p style="text-align:center; margin-top:1rem; color:#e3e4e4; margin-bottom:1.2rem; font-weight:600;">
                 Si no hay transmisión en vivo, verás el último video publicado.<br>
-                <a href="https://www.facebook.com/CasaDeAdoracionNJ/live" target="_blank" class="btn" style="background:var(--main-red); color:var(--main-text); border:2px solid var(--main-red); box-shadow:var(--main-shadow-sm);">Ver en Facebook</a>
             </p>
+            <div style="text-align:center;">
+                <a href="https://www.facebook.com/CasaDeAdoracionNJ/live" target="_blank" class="btn" style="background:var(--main-red); color:var(--main-text); border:2px solid var(--main-red); box-shadow:var(--main-shadow-sm);">Ver en Facebook</a>
+            </div>
         </div>
     </section>
     
     <!-- Contacto -->
-    <section class="contact" id="contacto">
+    <section class="contact" id="contacto" style="margin-top:3rem;">
         <div class="container">
             <h2 class="section-title">Contáctanos</h2>
             <div class="contact-content">
