@@ -12,24 +12,26 @@
 <body>
     <!-- Encabezado -->
 <header>
-    <div class="container header-container">
-        <a href="/church/public#inicio" class="logo" style="text-decoration:none;">
-            <div class="logo-img-wrapper">
-                <img src="../resources/Images/logo.webp" alt="Casa de Adoración Logo">
-            </div>
-            <span class="logo-text">Casa de Adoración NJ</span>
-        </a>
+    <div class="container header-container" style="display:flex; align-items:center; justify-content:space-between; gap:2.5rem;">
+        <div style="display:flex; align-items:center; gap:1.2rem;">
+            <a href="/church/public#inicio" class="logo" style="text-decoration:none; display:flex; align-items:center; gap:0.7rem;">
+                <div class="logo-img-wrapper">
+                    <img src="../resources/Images/logo.webp" alt="Casa de Adoración Logo">
+                </div>
+                <span class="logo-text" style="font-size:1.08rem; font-weight:700; color:var(--main-red); letter-spacing:0.01em;">Casa de Adoración NJ</span>
+            </a>
+        </div>
         <nav>
 <!-- filepath: c:\xampp\htdocs\Test\resources\views\Church.blade.php -->
-<ul class="nav-menu">
-    <li class="nav-item"><a href="#inicio" class="nav-link" style="color:#fff !important;">Inicio</a></li>
-    <li class="nav-item"><a href="#nosotros" class="nav-link" style="color:#fff !important;">Nosotros</a></li>
-    <li class="nav-item"><a href="#salmo" class="nav-link" style="color:#fff !important;">Salmo</a></li>
-    <li class="nav-item"><a href="#servicios" class="nav-link" style="color:#fff !important;">Servicios</a></li>
-    <li class="nav-item"><a href="#eventos" class="nav-link" style="color:#fff !important;">Eventos</a></li>
-    <li class="nav-item"><a href="#galeria" class="nav-link" style="color:#fff !important;">Galería</a></li>
-    <li class="nav-item"><a href="#transmision" class="nav-link" style="color:#fff !important;">Transmisión</a></li>
-    <li class="nav-item"><a href="#contacto" class="nav-link" style="color:#fff !important;">Contacto</a></li>
+<ul class="nav-menu" style="display:flex; align-items:center; gap:0.5rem;">
+    <li class="nav-item"><a href="#inicio" class="nav-link" style="color:#fff !important; font-size:0.89rem;">Inicio</a></li>
+    <li class="nav-item"><a href="#nosotros" class="nav-link" style="color:#fff !important; font-size:0.89rem;">Nosotros</a></li>
+    <li class="nav-item"><a href="#salmo" class="nav-link" style="color:#fff !important; font-size:0.89rem;">Salmo</a></li>
+    <li class="nav-item"><a href="#servicios" class="nav-link" style="color:#fff !important; font-size:0.89rem;">Servicios</a></li>
+    <li class="nav-item"><a href="#eventos" class="nav-link" style="color:#fff !important; font-size:0.89rem;">Eventos</a></li>
+    <li class="nav-item"><a href="#galeria" class="nav-link" style="color:#fff !important; font-size:0.89rem;">Galería</a></li>
+    <li class="nav-item"><a href="#transmision" class="nav-link" style="color:#fff !important; font-size:0.89rem;">Transmisión</a></li>
+    <li class="nav-item"><a href="#contacto" class="nav-link" style="color:#fff !important; font-size:0.89rem; margin-right:1.05cm;">Contacto</a></li>
     @guest
         <li class="nav-item">
             <a href="{{ route('login.form') }}" class="nav-link btn text-white" style="color:#fff !important;">Iniciar sesión</a>
@@ -37,37 +39,37 @@
         <li class="nav-item">
             <a href="{{ route('register.form') }}" class="btn btn-outline">Registrarse</a>
         </li>
-@else
-    <li class="nav-item">
-        <form method="POST" action="{{ route('logout') }}" style="display:inline;">
-            @csrf
-            <button type="submit" class="nav-link btn btn-outline">Cerrar sesión</button>
-        </form>
-    </li>
-    <li class="nav-item" id="admin-btn" style="display:none;">
-        <a href="/church/public/admin" class="nav-link btn text-white">Panel Admin</a>
-    </li>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Mostrar el botón Panel Admin si el usuario está autenticado y tiene perfil permitido
-            @if(Auth::check())
-                var perfil = @json(Auth::user()->perfil);
-                var perfilesPermitidos = ['Admin', 'Eventos', 'Salmos', 'Gestor', 'Galeria'];
-                if (perfilesPermitidos.includes(perfil)) {
-                    document.getElementById('admin-btn').style.display = 'block';
-                }
-            @else
-                // Fallback para usuarios no autenticados (por si acaso)
-                const user = JSON.parse(localStorage.getItem('usuario'));
-                const perfilesPermitidos = ['Admin', 'Eventos', 'Salmos', 'Gestor', 'Galeria'];
-                if (user && perfilesPermitidos.includes(user.perfil)) {
-                    document.getElementById('admin-btn').style.display = 'block';
-                }
-            @endif
-        });
-    </script>
-@endguest
-</ul>                
+    @else
+        <li class="nav-item">
+            <form method="POST" action="{{ route('logout') }}" style="display:inline;">
+                @csrf
+                <button type="submit" class="nav-link btn btn-outline">Cerrar sesión</button>
+            </form>
+        </li>
+        <li class="nav-item" id="admin-btn" style="display:none;">
+            <a href="/church/public/admin" class="nav-link btn text-white">Panel Admin</a>
+        </li>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Mostrar el botón Panel Admin si el usuario está autenticado y tiene perfil permitido
+                @if(Auth::check())
+                    var perfil = @json(Auth::user()->perfil);
+                    var perfilesPermitidos = ['Admin', 'Eventos', 'Salmos', 'Gestor', 'Galeria'];
+                    if (perfilesPermitidos.includes(perfil)) {
+                        document.getElementById('admin-btn').style.display = 'block';
+                    }
+                @else
+                    // Fallback para usuarios no autenticados (por si acaso)
+                    const user = JSON.parse(localStorage.getItem('usuario'));
+                    const perfilesPermitidos = ['Admin', 'Eventos', 'Salmos', 'Gestor', 'Galeria'];
+                    if (user && perfilesPermitidos.includes(user.perfil)) {
+                        document.getElementById('admin-btn').style.display = 'block';
+                    }
+                @endif
+            });
+        </script>
+    @endguest
+</ul>
                 <div class="hamburger">
                     <span></span>
                     <span></span>
