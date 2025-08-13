@@ -35,7 +35,7 @@ main, .container, header, footer, section, .hero {
 }
 
 a {
-    --main-red-dark: #dc2640; /* Rojo oscuro */
+    --main-red-dark: #fe194a; /* Rojo oscuro */
     --main-red-dark-text: #dc2640; /* Rojo moderno oscuro para textos */
     transition: color 0.2s;
 }
@@ -184,7 +184,7 @@ nav {
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(24,24,24,0.65);
+    background: rgba(24, 24, 24, 0.563);
     z-index: 1;
 }
 
@@ -254,7 +254,7 @@ nav {
 .section-title {
     font-family: 'Lora', serif;
     font-size: 2rem;
-    color: #DC2640;
+    color: #fff;
     margin-bottom: 2rem;
     text-align: center;
     font-weight: 700;
@@ -281,13 +281,13 @@ nav {
 
 .about-title {
     font-size: 1.3rem;
-    color: var(--main-red-text); /* Rosa claro */
+    color: #e11d48 !important;
     margin-bottom: 0.7rem;
 }
 
 .about-description {
     margin-bottom: 1rem;
-    color: #ffd6d6;
+    color: #ffffff;
 }
 
 /* Psalm of the Week */
@@ -358,7 +358,7 @@ nav {
 }
 
 .service-title {
-    color: var(--main-red-text); /* Rosa claro */
+    color: #e11d48 !important;
     font-size: 1.2rem;
     margin-bottom: 0.5rem;
     font-weight: 600;
@@ -366,7 +366,7 @@ nav {
 
 .service-description {
     margin-bottom: 1rem;
-    color: #ffd6d6;
+    color: #ffffff;
 }
 
 /* Events */
@@ -438,7 +438,7 @@ nav {
     max-width: 100%;
     word-break: break-word;
     white-space: normal;
-    color: #ffd6d6;
+    color: #ffffff;
 }
 
 /* Gallery */
@@ -512,7 +512,7 @@ nav {
 }
 
 .contact-title {
-    color: #9B131A;
+    color: #e11d48;
     font-size: 1.1rem;
     margin-bottom: 0.7rem;
     font-weight: 600;
@@ -635,7 +635,7 @@ footer {
     font-family: 'Lora', serif;
     font-size: 1.2rem;
     font-weight: 700;
-    color: var(--main-red-text); /* Rosa claro */
+    color: #e11d48 !important;
 }
 
 .footer-description {
@@ -648,7 +648,7 @@ footer {
     font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 0.7rem;
-    color: var(--main-red-text); /* Rosa claro */
+    color: #e11d48 !important;
 }
 
 .footer-links {
@@ -658,6 +658,10 @@ footer {
 
 .footer-link {
     margin-bottom: 0.5rem;
+}
+.event-title {
+    color: #E11D48 !important;
+    text-shadow: 0 2px 8px #181a1b88;
 }
 
 .footer-link a {
@@ -680,22 +684,23 @@ footer {
 
 /* Paleta moderna y cristalina */
 :root {
-    --main-red: #DC2640; /* Botones */
-    --main-red-dark: #DC2640; /* Rojo oscuro */
+    --main-red: #fe194a; /* Botones */
+    --main-red-dark: #fe194a; /* Rojo oscuro */
     --main-red-glass: rgba(226, 50, 71, 0.18); /* Cristalino, más vivo (botones) */
-    --main-red-text: #f05c5c; /* Home: barra de navegación, logo, botones */
-    --main-red-dark-text: #e4455d; /* Rojo moderno oscuro para textos */
+    --main-red-text: #fe194a; /* Home: barra de navegación, logo, botones */
+    --main-red-dark-text: #fff; /* Rojo moderno oscuro para textos */
     --main-bg-glass: rgba(19, 19, 19, 0.005); /* Fondo glass sutil */
     --main-bg-overlay: rgba(19, 19, 19, 0.796); /* Overlay encima de la imagen, edita la opacidad aquí */
     --main-text: #ffffff; /* Rosa muy claro para textos principales */
     --main-text-secondary: #5eb6d7; /* Azul oscuro para textos secundarios */
     --main-accent: #e3e4e4; /* Azul claro/acento */
-    --main-border: rgba(226, 50, 71, 0.38); /* Borde con el nuevo rojo */
-    --main-shadow-sm: 0 2px 16px rgba(226, 50, 71, 0.13);
-    --main-shadow-md: 0 4px 24px rgba(226, 50, 71, 0.18);
-    --main-shadow-lg: 0 8px 32px rgba(226, 50, 71, 0.22);
-    --main-shadow-xl: 0 12px 48px rgba(226, 50, 71, 0.25);
-    --main-gradient: linear-gradient(135deg, #e63247 0%, #ffe4e1 100%);
+    --main-border: rgba(200, 39, 35, 0.38); /* Borde con el nuevo rojo */
+    --main-shadow-sm: 0 2px 16px rgba(200, 39, 35, 0.13);
+    --main-shadow-md: 0 4px 24px rgba(200, 39, 35, 0.18);
+    --main-shadow-lg: 0 8px 32px rgba(200, 39, 35, 0.22);
+    --main-shadow-xl: 0 12px 48px rgba(200, 39, 35, 0.25);
+    --main-gradient: linear-gradient(135deg, #C82723 0%, #ffe4e1 100%);
+    --main-red-hover: #E85C50; /* Color más claro para hover */
 }
 
 
@@ -752,7 +757,7 @@ footer {
 .btn:hover,
 .btn-outline:hover {
     background: var(--main-red) !important;
-    color: var(--main-accent) !important;
+        background: var(--main-red-hover) !important;
     border: 2px solid var(--main-red-dark) !important;
     box-shadow: 0 4px 24px var(--main-red-glass);
 }
@@ -767,7 +772,7 @@ footer {
 }
 
 .social-link:hover {
-    background: #fff !important;
+        background: var(--main-red-hover) !important;
     color: var(--main-red-dark) !important;
     box-shadow: 0 4px 16px var(--main-red-glass);
 }

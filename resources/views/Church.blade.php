@@ -22,14 +22,14 @@
         <nav>
 <!-- filepath: c:\xampp\htdocs\Test\resources\views\Church.blade.php -->
 <ul class="nav-menu">
-    <li class="nav-item"><a href="#inicio" class="nav-link">Inicio</a></li>
-    <li class="nav-item"><a href="#nosotros" class="nav-link">Nosotros</a></li>
-    <li class="nav-item"><a href="#salmo" class="nav-link">Salmo</a></li>
-    <li class="nav-item"><a href="#servicios" class="nav-link">Servicios</a></li>
-    <li class="nav-item"><a href="#eventos" class="nav-link">Eventos</a></li>
-    <li class="nav-item"><a href="#galeria" class="nav-link">Galería</a></li>
-    <li class="nav-item"><a href="#transmision" class="nav-link">Transmisión</a></li>
-    <li class="nav-item"><a href="#contacto" class="nav-link">Contacto</a></li>
+    <li class="nav-item"><a href="#inicio" class="nav-link" style="color:#fff !important;">Inicio</a></li>
+    <li class="nav-item"><a href="#nosotros" class="nav-link" style="color:#fff !important;">Nosotros</a></li>
+    <li class="nav-item"><a href="#salmo" class="nav-link" style="color:#fff !important;">Salmo</a></li>
+    <li class="nav-item"><a href="#servicios" class="nav-link" style="color:#fff !important;">Servicios</a></li>
+    <li class="nav-item"><a href="#eventos" class="nav-link" style="color:#fff !important;">Eventos</a></li>
+    <li class="nav-item"><a href="#galeria" class="nav-link" style="color:#fff !important;">Galería</a></li>
+    <li class="nav-item"><a href="#transmision" class="nav-link" style="color:#fff !important;">Transmisión</a></li>
+    <li class="nav-item"><a href="#contacto" class="nav-link" style="color:#fff !important;">Contacto</a></li>
     @guest
         <li class="nav-item">
             <a href="{{ route('login.form') }}" class="nav-link btn text-white" style="color:#fff !important;">Iniciar sesión</a>
@@ -45,7 +45,7 @@
         </form>
     </li>
     <li class="nav-item" id="admin-btn" style="display:none;">
-        <a href="/church/public/admin" class="btn">Panel Admin</a>
+        <a href="/church/public/admin" class="nav-link btn text-white">Panel Admin</a>
     </li>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -123,7 +123,7 @@
                 <div class="psalm-text">
                     <h3 class="psalm-reference"></h3>
                     <div class="psalm-quote"></div>
-                    <h1 class="section-title" style="font-weight:600;margin-top:1.2rem;margin-bottom:0.3rem;">Reflexión</h1>
+                    <h1 class="psalm-reference" style="font-weight:600;margin-top:1.2rem;margin-bottom:0.3rem;">Reflexión</h1>
                     <p class="psalm-reflection">Este salmo nos recuerda que Dios es nuestro proveedor y protector. Cuando confiamos en Él como nuestro pastor, encontramos paz y renovación para nuestras almas. Esta semana, reflexionemos sobre cómo Dios nos guía y nos da descanso en medio de nuestras ocupadas vidas.</p>
                 </div>
             </div>

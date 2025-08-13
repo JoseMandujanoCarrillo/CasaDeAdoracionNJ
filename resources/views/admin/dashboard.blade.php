@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <button onclick="window.location.href='/church/public/'" id="btn-volver-inicio" style="margin-top:0.2rem; margin-bottom:0.2rem; background:#181818; color:#fff; border:2px solid #181818; font-weight:600; border-radius:25px; padding:0.7rem 1.5rem; transition:background 0.2s, color 0.2s; cursor:pointer;">
                     <i class="fas fa-arrow-left"></i> Volver al Inicio
                 </button>
-                <div id="user-info" style="color:#232323; font-size:1rem;"></div>
+                <div id="user-info" style="color:#fff; font-size:1rem;"></div>
             </div>
             <style>
             #btn-volver-inicio:hover {
